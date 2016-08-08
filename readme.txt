@@ -28,7 +28,9 @@ should be used in place of the symbolic name
 Installation Instructions
 
 1)  Download the Stacked Windrose Image Generator for Weewx extension from the
-Stacked Windrose Image Generator for Weewx GitHub repositry.
+Stacked Windrose Image Generator for Weewx GitHub repositry. The extension
+package is named stackedwindrose-X.Y.Z.tar.gz and can be found on the Releases
+page.
 
 2)  Run the installer:
 
@@ -208,14 +210,16 @@ file being generated during each report generation cycle.
 
 Manual Installation Instructions
 
-1)  Download the Stacked Windrose Image Generator for weewx extension from the
-Stacked Windrose Image Generator for weewx GitHub repositry.
+1)  Download the Stacked Windrose Image Generator for Weewx extension from the
+Stacked Windrose Image Generator for Weewx GitHub repositry. The extension
+package is named stackedwindrose-X.Y.Z.tar.gz and can be found on the Releases
+page.
 
 2)  Extract the files from the tar.gz file:
 
     $ tar -zxvf stackedwindrose-X.Y.Z.tar.gz
 
-3)   Copy files as follows:
+3)  Copy files as follows:
 
     $ cp bin/user/imageStackedWindRose.py $BIN_ROOT/user
     $ cp -R skins/* $SKIN_ROOT
@@ -387,7 +391,7 @@ section of weewx.conf, eg
         skin = StackedWindRose
         HTML_ROOT = /use/this/folder
 
-7)  Restart Weewx:
+7)  Restart weewx:
 
     $ sudo /etc/init.d/weewx stop
     $ sudo /etc/init.d/weewx start
@@ -396,7 +400,7 @@ section of weewx.conf, eg
 file being generated during each report generation cycle.
 
 
-Uninstallation Instuctions
+Uninstallation Instructions
 
 1)  Run the uninstaller:
 
@@ -404,7 +408,7 @@ Uninstallation Instuctions
 
     This command assumes the user is currently in the $BIN_ROOT folder.
 
-2)  Restart Weewx:
+2)  Restart weewx:
 
     $ sudo /etc/init.d/weewx stop
     $ sudo /etc/init.d/weewx start
@@ -420,7 +424,7 @@ Manual Uninstallation
 
     $ rm -rf $SKIN_ROOT/StackedWindRose
 
-4)  Restart Weewx:
+4)  Restart weewx:
 
     $ sudo /etc/init.d/weewx stop
     $ sudo /etc/init.d/weewx start
