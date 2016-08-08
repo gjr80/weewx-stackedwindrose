@@ -2,43 +2,52 @@
 #   Copyright (c) 2013-2016 Gary Roderick <gjroderick(at)gmail.com>
 #
 # This program is free software; you can redistribute it and/or modify it
-# under the terms of the GNU General Public License as published by the Free 
-# Software Foundation; either version 3 of the License, or (at your option) 
+# under the terms of the GNU General Public License as published by the Free
+# Software Foundation; either version 3 of the License, or (at your option)
 # any later version.
 #
 # This program is distributed in the hope that it will be useful, but WITHOUT
 # ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or
 # FITNESS FOR A PARTICULAR PURPOSE.  See the GNU General Public License for
 # more details.
-# 
+#
 # Version: 2.0.0.                                      Date: 8 August 2016
-# 
+#
 # Revision History
-#   8 August 2016   v2.0.0      -Packaged as a standalone weewx extension.
-#                               -Added unit conversion for wind speed (seems 
-#                                it only ever used the archive units).
-#                               -Restructured the ImageStackedWindRoseGenerator
-#                                class.
-#                               -Removed a number of unused imports and 
-#                                properties.
-#   August 2015     v1.2.0      -Revised for Weewx v3.2.0
-#                               -Fixed issue whereby a fatal error was thrown
-#                                if imageStackedWindRose3 could not find the
-#                                font specified in skin.conf. Error is now
-#                                trapped and a default system font used
-#                                instead.
-#   10 January 2015  v1.0.0     -Rewritten for Weewx v3.0.0
-#   1 May 2014       v0.9.3     -Fixed issue that arose with Weewx 2.6.3 now
-#                                allowing use of UTF-8 characters in plots
-#                               -Fixed logic error in code that calculates size
-#                                of windrose 'petals'
-#                               -Removed unnecessary import statements
-#                               -Tweaked windrose size calculations to better
-#                                cater for labels on plot
-#   30 July 2013     v0.9.1     -Revised version number to align with Weewx-WD
-#                                version numbering
-#   20 July 2013     v0.1       -Initial implementation
-# 
+#   8 August 2016   v2.0.0
+#       -   Packaged as a standalone weewx extension.
+#       -   Added unit conversion for wind speed (seems it only ever used the
+#           archive units).
+#       -   Restructured the ImageStackedWindRoseGenerator class.
+#       -   Removed a number of unused imports and properties.
+#       -   Various formatting changes, mainly shortening of variable/property
+#           names.
+#
+#   August 2015     v1.2.0
+#       -   Revised for Weewx v3.2.0.
+#       -   Fixed issue whereby a fatal error was thrown if
+#           imageStackedWindRose could not find the font specified in
+#           skin.conf. Error is now trapped and a default system font used
+#           instead.
+#
+#   10 January 2015  v1.0.0
+#       -   Rewritten for Weewx v3.0.0.
+#
+#   1 May 2014       v0.9.3
+#       -   Fixed issue that arose with Weewx 2.6.3 now allowing use of UTF-8
+#           characters in plots.
+#       -   Fixed logic error in code that calculates size of windrose
+#           'petals'.
+#       -   Removed unnecessary import statements.
+#       -   Tweaked windrose size calculations to better cater for labels on
+#           the plot.
+#
+#   30 July 2013     v0.9.1
+#       -   Revised version number to align with Weewx-WD version numbering.
+#
+#   20 July 2013     v0.1
+#       -   Initial implementation
+#
 
 import math
 import os.path
@@ -56,32 +65,35 @@ from weewx.units import Converter
 
 STACKED_WINDROSE_VERSION = '2.0.0'
 
+DEFAULT_PETAL_COLORS = ['lightblue', 'blue', 'midnightblue', 'forestgreen',
+                        'limegreen', 'green', 'greenyellow']
+
 #=============================================================================
 #                    Class ImageStackedWindRoseGenerator
 #=============================================================================
 
 class ImageStackedWindRoseGenerator(weewx.reportengine.ReportGenerator):
     """Class to manage the stacked windrose image generator.
-    
-    The ImageStackedWindRoseGenerator class is a customised report generator 
-    that produces polar wind rose plots based upon weewx archive data. The 
-    generator produces image files that may be used included in a web page, a 
+
+    The ImageStackedWindRoseGenerator class is a customised report generator
+    that produces polar wind rose plots based upon weewx archive data. The
+    generator produces image files that may be used included in a web page, a
     weewx web page template or elsewhere as required.
-    
-    The wind rose plot charatcteristics may be controlled through option 
+
+    The wind rose plot charatcteristics may be controlled through option
     settings in the [Stdreport] [[StackedWindRose]] section of weewx.conf.
     """
 
     def __init__(self, config_dict, skin_dict, gen_ts, first_run, stn_info):
         # Initialise my superclass
-        super(ImageStackedWindRoseGenerator, self).__init__(config_dict, 
-                                                            skin_dict, 
-                                                            gen_ts, 
-                                                            first_run, 
+        super(ImageStackedWindRoseGenerator, self).__init__(config_dict,
+                                                            skin_dict,
+                                                            gen_ts,
+                                                            first_run,
                                                             stn_info)
 
         # Get a manager for our archive
-        _binding = self.config_dict['StdArchive'].get('data_binding', 
+        _binding = self.config_dict['StdArchive'].get('data_binding',
                                                       'wx_binding')
         self.archive = self.db_binder.get_manager(_binding)
 
@@ -99,14 +111,14 @@ class ImageStackedWindRoseGenerator(weewx.reportengine.ReportGenerator):
         self.image_back_image = self.image_dict['image_background_image']
 
         # Set compass point abbreviations
-        
-        _compass = option_as_list(self.skin_dict.get(['Labels']['compass_points'], 
-                                                     'N, S, E, W'))
+
+        _compass = option_as_list(self.skin_dict['Labels'].get('compass_points',
+                                                               'N, S, E, W'))
         self.north = _compass[0]
         self.south = _compass[1]
         self.east = _compass[2]
         self.west = _compass[3]
-        
+
         # Set windrose attributes
         self.plot_border = int(self.image_dict['windrose_plot_border'])
         self.legend_bar_width = int(self.image_dict['windrose_legend_bar_width'])
@@ -118,22 +130,17 @@ class ImageStackedWindRoseGenerator(weewx.reportengine.ReportGenerator):
         self.label_font_size  = int(self.image_dict['windrose_label_font_size'])
         self.label_font_color = int(self.image_dict['windrose_label_font_color'], 0)
         # Look for petal colours, if not defined then set some defaults
-        try:
-            self.petal_colors = self.image_dict['windrose_plot_petal_colors']
-        except KeyError:
-            self.petal_colors = ['lightblue','blue','midnightblue','forestgreen','limegreen','green','greenyellow']
-        # Loop through petal colours looking for 0xBGR values amongst colour
-        # names, set any 0xBGR to their numeric value and leave colour names
-        # alone
-        i = 0
-        while i < len(self.petal_colors):
+        _colors = option_as_list(self.image_dict.get('windrose_plot_petal_colors',
+                                                     DEFAULT_PETAL_COLORS))
+        _colors = DEFAULT_PETAL_COLORS if len(_colors) < 7 else _colors
+        self.petal_colors=[]
+        for _color in _colors:
             try:
                 # Can it be converted to a number?
-                self.petal_colors[i] = int(self.petal_colors[i],0)
+                self.petal_colors.append(int(_color, 0))
             except ValueError:  # Cannot convert to a number, assume it is
-                                # a colour word so leave it
-                pass
-            i += 1
+                                # a colour word so append it as is
+                self.petal_colors.append(_color)
         # Get petal width, if not defined then set default to 16 (degrees)
         try:
             self.petal_width = int(self.image_dict['windrose_plot_petal_width'])
@@ -153,8 +160,8 @@ class ImageStackedWindRoseGenerator(weewx.reportengine.ReportGenerator):
     def genWindRosePlots(self):
         """Generate the windrose plots.
 
-        Loop through each 2nd level section (ie [[]]) under 
-        [ImageStackedWindRoseGenerator] and generate the plot defined by each 
+        Loop through each 2nd level section (ie [[]]) under
+        [ImageStackedWindRoseGenerator] and generate the plot defined by each
         2nd level section.
         """
 
@@ -174,7 +181,7 @@ class ImageStackedWindRoseGenerator(weewx.reportengine.ReportGenerator):
                     self.p_gen_ts = self.archive.lastGoodStamp()
                     if not self.p_gen_ts:
                         self.p_gen_ts = time.time()
-                # Get the period for the plot, default to 24 hours if no 
+                # Get the period for the plot, default to 24 hours if no
                 # period set
                 self.period = p_options.as_int('period') if p_options.has_key('period') else 86400
                 # Get the path of the image file we will save
@@ -190,9 +197,8 @@ class ImageStackedWindRoseGenerator(weewx.reportengine.ReportGenerator):
                 img_file = os.path.join(image_root, '%s.%s' % (plot,
                                                                format))
                 # Check whether this plot needs to be done at all:
-#### Uncomment the following 2 lines before release
-#                if skipThisPlot(img_file, plot):
-#                    continue
+                if self.skipThisPlot(img_file, plot):
+                    continue
                 # Create the subdirectory that the image is to be put in.
                 # Wrap in a try block in case it already exists.
                 try:
@@ -241,7 +247,7 @@ class ImageStackedWindRoseGenerator(weewx.reportengine.ReportGenerator):
                                                                                      self.obName)
                     (_, time_vec_t_wd_stop, dir_vec) = self.archive.getSqlVectors(getSqlVectors_TS,
                                                                                   self.dirName)
-                    # Convert our speed values to the units we are going to 
+                    # Convert our speed values to the units we are going to
                     # use in our plot
                     speed_vec = self.converter.convert(data_speed)
                     # Get units for display on legend
@@ -465,7 +471,7 @@ class ImageStackedWindRoseGenerator(weewx.reportengine.ReportGenerator):
                     self.originY - bbMinRad * (i + 0.5),
                     self.originX + bbMinRad * (i + 0.5),
                     self.originY + bbMinRad * (i + 0.5))
-            self.draw.ellipse(bbox, 
+            self.draw.ellipse(bbox,
                               outline=self.image_back_range_ring_color,
                               fill=self.image_back_circle_color)
             i -= 1
@@ -512,7 +518,7 @@ class ImageStackedWindRoseGenerator(weewx.reportengine.ReportGenerator):
         # with background colour set to that of the circular plot
         i = 2
         while i < 5:
-            textWidth, textHeight = self.draw.textsize(speedLabels[i-1], 
+            textWidth, textHeight = self.draw.textsize(speedLabels[i-1],
                                                        font=self.plotFont)
             self.draw.rectangle(((self.originX + (2 * i + 1) * labelOffsetX - textWidth / 2, self.originY + (2 * i + 1) * labelOffsetY - textHeight / 2),
                                 (self.originX + (2 * i + 1) * labelOffsetX + textWidth / 2, self.originY + (2 * i + 1) * labelOffsetY + textHeight / 2)),
@@ -626,14 +632,14 @@ class ImageStackedWindRoseGenerator(weewx.reportengine.ReportGenerator):
                            fill=self.legend_font_color,
                            font=self.legendFont)
 
-    def skipThisPlot(img_file, plotname):
+    def skipThisPlot(self, img_file, plotname):
         """Determine whether the plot is to be skipped or not.
 
-        Successive report cyles will likely produce a windrose that, 
-        irrespective of period, would be different to the windrose from the 
-        previous report cycle. In most cases the changes are insignificant so, 
-        as with the weewx graphical plots, long period plots are generated 
-        less frequently than shorter period plots. Windrose plots will be 
+        Successive report cyles will likely produce a windrose that,
+        irrespective of period, would be different to the windrose from the
+        previous report cycle. In most cases the changes are insignificant so,
+        as with the weewx graphical plots, long period plots are generated
+        less frequently than shorter period plots. Windrose plots will be
         skipped if:
             (1) no period was specified (need to put entry in syslog)
             (2) plot length is greater than 30 days and the plot file is less
@@ -649,7 +655,7 @@ class ImageStackedWindRoseGenerator(weewx.reportengine.ReportGenerator):
             (1) if an existing plot does not exist
             (2) an existing plot exists but it is older than 24 hours
             (3) every 24 hours when period > 30 days (2592000 sec)
-            (4) every 1 hour when period is > 7 days (604800 sec) but 
+            (4) every 1 hour when period is > 7 days (604800 sec) but
                 <= 30 days (2592000 sec)
             (5) every report cycle when period < 7 days (604800 sec)
 
@@ -657,7 +663,7 @@ class ImageStackedWindRoseGenerator(weewx.reportengine.ReportGenerator):
 
             img_file: full path and filename of plot file
             plotname: name of plot
-            
+
         Returns:
             True if plot is to be generated, False if plot is to be skipped.
         """
