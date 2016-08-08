@@ -51,7 +51,7 @@ import weewx.reportengine
 
 from datetime import datetime as dt
 from weeplot.utilities import get_font_handle
-from weeutil.weeutil import accumulateLeaves, TimeSpan
+from weeutil.weeutil import accumulateLeaves, option_as_list, TimeSpan
 from weewx.units import Converter
 
 STACKED_WINDROSE_VERSION = '2.0.0'
@@ -98,6 +98,15 @@ class ImageStackedWindRoseGenerator(weewx.reportengine.ReportGenerator):
         self.image_back_range_ring_color = int(self.image_dict['image_background_range_ring_color'], 0)
         self.image_back_image = self.image_dict['image_background_image']
 
+        # Set compass point abbreviations
+        
+        _compass = option_as_list(self.skin_dict.get(['Labels']['compass_points'], 
+                                                     'N, S, E, W'))
+        self.north = _compass[0]
+        self.south = _compass[1]
+        self.east = _compass[2]
+        self.west = _compass[3]
+        
         # Set windrose attributes
         self.plot_border = int(self.image_dict['windrose_plot_border'])
         self.legend_bar_width = int(self.image_dict['windrose_legend_bar_width'])
@@ -467,24 +476,24 @@ class ImageStackedWindRoseGenerator(weewx.reportengine.ReportGenerator):
         self.draw.line([(self.originX - self.roseMaxDiameter / 2 - 2, self.originY), (self.originX + self.roseMaxDiameter / 2 + 2, self.originY)],
                        fill=self.image_back_range_ring_color)
         #Draw N,S,E,W markers
-        textWidth, textHeight = self.draw.textsize('N', font=self.plotFont)
+        textWidth, textHeight = self.draw.textsize(self.north, font=self.plotFont)
         self.draw.text((self.originX - textWidth /2, self.originY - self.roseMaxDiameter / 2 - 1 - textHeight),
-                       'N',
+                       self.north,
                        fill=self.plot_font_color,
                        font=self.plotFont)
-        textWidth, textHeight = self.draw.textsize('S', font=self.plotFont)
+        textWidth, textHeight = self.draw.textsize(self.south, font=self.plotFont)
         self.draw.text((self.originX - textWidth /2, self.originY + self.roseMaxDiameter / 2 + 3),
-                       'S',
+                       self.south,
                        fill=self.plot_font_color,
                        font=self.plotFont)
-        textWidth, textHeight = self.draw.textsize('W', font=self.plotFont)
+        textWidth, textHeight = self.draw.textsize(self.west, font=self.plotFont)
         self.draw.text((self.originX - self.roseMaxDiameter / 2 - 1 - textWidth,self.originY-textHeight / 2),
-                       'W',
+                       self.west,
                        fill=self.plot_font_color,
                        font=self.plotFont)
-        textWidth, textHeight = self.draw.textsize('E', font=self.plotFont)
+        textWidth, textHeight = self.draw.textsize(self.east, font=self.plotFont)
         self.draw.text((self.originX + self.roseMaxDiameter / 2 + 1, self.originY - textHeight / 2),
-                       'E',
+                       self.east,
                        fill=self.plot_font_color,
                        font=self.plotFont)
         # Draw % labels on rings
