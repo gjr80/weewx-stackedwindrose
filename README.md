@@ -54,6 +54,8 @@ Stacked Windrose Image Generator for weewx GitHub repositry.
 	                [[[[windGust]]]]
 	                    time_stamp = %H:%M %d %b %Y
 
+	**Note**: The `time_stamp` setting uses standard Python 2 `strftime()/strptime()` format directives.
+	
 	**Note**: Some settings were omitted from the above extract for brevity.
 
 1.	By default the generated file(s) are placed in the $HTML_ROOT folder. If you wish to place the generated files in another directory then insert a `HTML_ROOT` setting under the `[[StackedWindRose]]` sub-section in the `[StdReport]` section of `weewx.conf` eg:
@@ -209,6 +211,8 @@ Stacked Windrose Image Generator for weewx GitHub repositry.
 	                [[[[windGust]]]]
 	                    time_stamp = %H:%M %d %b %Y
 
+	**Note**: The `time_stamp` setting uses standard Python 2 `strftime()/strptime()` format directives.
+	
 	**Note**: Some settings were omitted from the above extract for brevity.
 
 1.	By default the generated file(s) are placed in the $HTML_ROOT folder. If you wish to place the generated files in another directory then insert a `HTML_ROOT` setting under the `[[StackedWindRose]]` sub-section in the `[StdReport]` section of `weewx.conf` eg:
