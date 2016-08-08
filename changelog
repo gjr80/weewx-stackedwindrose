@@ -1,0 +1,29 @@
+v0.1.0
+*   initial implementation
+
+v0.9.1
+*   revised version number to align with Weewx-WD version numbering
+
+v0.9.3
+*   fixed issue that arose with Weewx 2.6.3 now allowing use of UTF-8 
+    characters in plots
+*   fixed logic error in code that calculates size of windrose 'petals'
+*   removed unnecessary import statements
+*   tweaked windrose size calculations to better cater for labels on plot
+
+v1.0.0
+*   rewritten for Weewx v3.0.0
+
+v1.2.0
+*   revised for Weewx v3.2.0
+*   fixed issue whereby a fatal error was thrown if imageStackedWindRose3 
+    could not find the font specified in skin.conf. Error is now trapped and a
+    default system font used instead.
+
+v2.0.0
+*   packaged as a standalone weewx extension
+*   added unit conversion for wind speed (seems it only ever used the archive
+    units)
+*   restructured the ImageStackedWindRoseGenerator class
+*   removed a number of unused imports and properties
+*   various formatting changes, mainly shortening of variable/property names
