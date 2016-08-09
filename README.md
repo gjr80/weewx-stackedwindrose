@@ -28,7 +28,7 @@ Where applicable the nominal location for your system and installation type shou
 
 1.	Run the installer:
 
-    	$ ./wee_extension install=stackedwindrose-X.Y.Z.tar.gz
+    	$ ./wee_extension --install=stackedwindrose-X.Y.Z.tar.gz
     
     This command assumes the user is currently in the $BIN_ROOT folder.
 
@@ -365,7 +365,7 @@ Where applicable the nominal location for your system and installation type shou
 
 1.  Run the uninstaller:
 
-    	$ ./wee_extension uninstall=StackedWindRose
+    	$ ./wee_extension --uninstall=StackedWindRose
 
     This command assumes the user is currently in the $BIN_ROOT folder.
 
