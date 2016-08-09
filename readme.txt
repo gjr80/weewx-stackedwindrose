@@ -34,7 +34,7 @@ page.
 
 2)  Run the installer:
 
-    $ ./wee_extension install=stackedwindrose-X.Y.Z.tar.gz
+    $ ./wee_extension --install=stackedwindrose-X.Y.Z.tar.gz
 
     This command assumes the user is currently in the $BIN_ROOT folder.
 
@@ -404,7 +404,7 @@ Uninstallation Instructions
 
 1)  Run the uninstaller:
 
-    $ ./wee_extension uninstall=StackedWindRose
+    $ ./wee_extension --uninstall=StackedWindRose
 
     This command assumes the user is currently in the $BIN_ROOT folder.
 

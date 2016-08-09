@@ -27,3 +27,6 @@ v2.0.0
 *   restructured the ImageStackedWindRoseGenerator class
 *   removed a number of unused imports and properties
 *   various formatting changes, mainly shortening of variable/property names
+
+v2.0.1
+*   fixed typo in readme install instructions
