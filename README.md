@@ -24,11 +24,13 @@ Where applicable the nominal location for your system and installation type shou
 
 ## Installation Instructions
 
-1.	Download the Stacked Windrose Image Generator for weewx extension from the Stacked Windrose Image Generator for weewx GitHub repositry. The extension package is named `stackedwindrose-X.Y.Z.tar.gz` and can be found on the Releases page.
+1.	Download the Stacked Windrose Image Generator for weewx extension package from the [Releases](https://github.com/gjr80/StackedWindRose/releases "StackedWindRose Releases page on GitHub") page. The current release oackage is named `stackedwindrose-2.0.1.tar.gz`. If your weewx PC has internet access you may be able to download the package directly as follows:
+
+		$ wget -P /var/tmp/ https://github.com/gjr80/StackedWindRose/releases/download/v2.0.1/stackedwindrose-2.0.1.tar.gz
 
 1.	Run the installer:
 
-    	$ ./wee_extension --install=stackedwindrose-X.Y.Z.tar.gz
+    	$ ./wee_extension --install=/var/tmp/stackedwindrose-2.0.1.tar.gz
     
     This command assumes the user is currently in the $BIN_ROOT folder.
 
@@ -185,16 +187,22 @@ Where applicable the nominal location for your system and installation type shou
     	$ sudo /etc/init.d/weewx stop
 	    $ sudo /etc/init.d/weewx start
 
-1.	This will result in the windrose image file being generated during each report generation cycle.
+1.	This will result in the windrose image file being generated during each report generation cycle. Generation can be confirmed by inspecting the weewx log, there should be a line similar to this amongst the report generation output: 
+
+		Aug  9 00:30:16 jessie2 weewx[1236]: imageStackedWindRose: Generated 1 images for StackedWindRose in 0.01 seconds
 
 
 ## Manual Installation Instructions
 
-1.	Download the Stacked Windrose Image Generator for weewx extension from the Stacked Windrose Image Generator for weewx GitHub repositry. The extension package is named `stackedwindrose-X.Y.Z.tar.gz` and can be found on the Releases page.
+1.	Download the Stacked Windrose Image Generator for weewx extension package from the [Releases](https://github.com/gjr80/StackedWindRose/releases "StackedWindRose Releases page on GitHub") page. The current release oackage is named `stackedwindrose-2.0.1.tar.gz`. If your weewx PC has internet access you may be able to download the package directly as follows:
+
+		$ wget -P /var/tmp/ https://github.com/gjr80/StackedWindRose/releases/download/v2.0.1/stackedwindrose-2.0.1.tar.gz
 
 1.	Extract the files from the tar.gz file:
 
-   		$ tar -zxvf stackedwindrose-X.Y.Z.tar.gz
+   		$ tar -zxvf /var/tmp/stackedwindrose-2.0.1.tar.gz -C /var/tmp
+
+	**Note**: This will extract the extension package files to the `/var/tmp` folder
 
 1.	Copy files as follows:
 
@@ -358,7 +366,9 @@ Where applicable the nominal location for your system and installation type shou
     	$ sudo /etc/init.d/weewx stop
 	    $ sudo /etc/init.d/weewx start
 
-1.	This will result in the windrose image file being generated during each report generation cycle.
+1.	This will result in the windrose image file being generated during each report generation cycle. Generation can be confirmed by inspecting the weewx log, there should be a line similar to this amongst the report generation output: 
+
+		Aug  9 00:30:16 jessie2 weewx[1236]: imageStackedWindRose: Generated 1 images for StackedWindRose in 0.01 seconds
 
 
 ## Uninstallation Instructions
