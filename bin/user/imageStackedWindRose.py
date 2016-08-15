@@ -11,9 +11,13 @@
 # FITNESS FOR A PARTICULAR PURPOSE.  See the GNU General Public License for
 # more details.
 #
-# Version: 2.0.0.                                      Date: 8 August 2016
+# Version: 2.0.2.                                      Date: 15 August 2016
 #
 # Revision History
+#  15 August 2016   v2.0.2
+#       -   Reworked imports to use PIL if available
+#   9 August 2016   v2.0.1
+#       -   Fixed typo in install instructions
 #   8 August 2016   v2.0.0
 #       -   Packaged as a standalone weewx extension.
 #       -   Added unit conversion for wind speed (seems it only ever used the
@@ -53,8 +57,11 @@ import math
 import os.path
 import syslog
 import time
-import Image
-import ImageDraw
+# try to import from PIL or revert to python-imaging if an error
+try:
+    from PIL import Image, ImageDraw
+except ImportError:
+    import Image, ImageDraw
 
 import weewx.reportengine
 
@@ -63,7 +70,7 @@ from weeplot.utilities import get_font_handle
 from weeutil.weeutil import accumulateLeaves, option_as_list, TimeSpan
 from weewx.units import Converter
 
-STACKED_WINDROSE_VERSION = '2.0.0'
+STACKED_WINDROSE_VERSION = '2.0.2'
 
 DEFAULT_PETAL_COLORS = ['lightblue', 'blue', 'midnightblue', 'forestgreen',
                         'limegreen', 'green', 'greenyellow']
