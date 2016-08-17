@@ -24,13 +24,13 @@ Where applicable the nominal location for your system and installation type shou
 
 ## Installation Instructions
 
-1.	Download the Stacked Windrose Image Generator for weewx extension package from the [Releases](https://github.com/gjr80/StackedWindRose/releases "StackedWindRose Releases page on GitHub") page. The current release oackage is named `stackedwindrose-2.0.1.tar.gz`. If your weewx PC has internet access you may be able to download the package directly as follows:
+1.	Download the Stacked Windrose Image Generator for weewx extension package from the [Releases](https://github.com/gjr80/StackedWindRose/releases "StackedWindRose Releases page on GitHub") page. The current release oackage is named `stackedwindrose-2.0.2.tar.gz`. If your weewx PC has internet access you may be able to download the package directly as follows:
 
-		$ wget -P /var/tmp/ https://github.com/gjr80/StackedWindRose/releases/download/v2.0.1/stackedwindrose-2.0.1.tar.gz
+		$ wget -P /var/tmp/ https://github.com/gjr80/StackedWindRose/releases/download/v2.0.2/stackedwindrose-2.0.2.tar.gz
 
 1.	Run the installer:
 
-    	$ ./wee_extension --install=/var/tmp/stackedwindrose-2.0.1.tar.gz
+    	$ ./wee_extension --install=/var/tmp/stackedwindrose-2.0.2.tar.gz
     
     This command assumes the user is currently in the $BIN_ROOT folder.
 
@@ -194,20 +194,20 @@ Where applicable the nominal location for your system and installation type shou
 
 ## Manual Installation Instructions
 
-1.	Download the Stacked Windrose Image Generator for weewx extension package from the [Releases](https://github.com/gjr80/StackedWindRose/releases "StackedWindRose Releases page on GitHub") page. The current release oackage is named `stackedwindrose-2.0.1.tar.gz`. If your weewx PC has internet access you may be able to download the package directly as follows:
+1.	Download the Stacked Windrose Image Generator for weewx extension package from the [Releases](https://github.com/gjr80/StackedWindRose/releases "StackedWindRose Releases page on GitHub") page. The current release oackage is named `stackedwindrose-2.0.2.tar.gz`. If your weewx PC has internet access you may be able to download the package directly as follows:
 
-		$ wget -P /var/tmp/ https://github.com/gjr80/StackedWindRose/releases/download/v2.0.1/stackedwindrose-2.0.1.tar.gz
+		$ wget -P /var/tmp/ https://github.com/gjr80/StackedWindRose/releases/download/v2.0.2/stackedwindrose-2.0.2.tar.gz
 
 1.	Extract the files from the tar.gz file:
 
-   		$ tar -zxvf /var/tmp/stackedwindrose-2.0.1.tar.gz -C /var/tmp
+   		$ tar -zxvf /var/tmp/stackedwindrose-2.0.2.tar.gz -C /var/tmp
 
 	**Note**: This will extract the extension package files to the `/var/tmp` folder
 
 1.	Copy files as follows:
 
-	    $ cp bin/user/imageStackedWindRose.py $BIN_ROOT/user
-    	$ cp -R skins/* $SKIN_ROOT
+	    $ cp /var/tmp/stackedwindrose/bin/user/imageStackedWindRose.py $BIN_ROOT/user
+    	$ cp -R /var/tmp/stackedwindrose/skins/* $SKIN_ROOT
 
 1.	In `weewx.conf`, modify the `[StdReport]` section by adding the following sub-section:
 

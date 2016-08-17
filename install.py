@@ -1,21 +1,27 @@
-##
-## This program is free software; you can redistribute it and/or modify it
-## under the terms of the GNU General Public License as published by the Free
-## Software Foundation; either version 2 of the License, or (at your option)
-## any later version.
-##
-## This program is distributed in the hope that it will be useful, but WITHOUT
-## ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or
-## FITNESS FOR A PARTICULAR PURPOSE.  See the GNU General Public License for
-## more details.
-##
-## Installer for StackedWindRose Image Generator Extension
-##
-## Version: 0.1.0                                       Date: 8 August 2016
-##
-## Revision History
-##  8 August 2016       v0.1.0  - initial implementation
-##
+#
+# This program is free software; you can redistribute it and/or modify it
+# under the terms of the GNU General Public License as published by the Free
+# Software Foundation; either version 2 of the License, or (at your option)
+# any later version.
+#
+# This program is distributed in the hope that it will be useful, but WITHOUT
+# ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or
+# FITNESS FOR A PARTICULAR PURPOSE.  See the GNU General Public License for
+# more details.
+#
+# Installer for StackedWindRose Image Generator Extension
+#
+# Version: 2.0.2                                      Date: 15 August 2016
+#
+# Revision History
+#  15 August 2016   v2.0.2
+#       -   Reworked imports to use PIL if available
+#       -   Updated readme/readme.txt
+#   9 August 2016   v2.0.1
+#       -   Fixed typo in install instructions
+#   8 August 2016   v2.0.0  
+#       -   Initial implementation
+#
 
 from setup import ExtensionInstaller
 
@@ -25,7 +31,7 @@ def loader():
 class StackedWindRoseInstaller(ExtensionInstaller):
     def __init__(self):
         super(StackedWindRoseInstaller, self).__init__(
-            version="0.1.0",
+            version="2.0.2",
             name='StackedWindRose',
             description='Stacked windrose image generator for weewx.',
             author="Gary Roderick",

@@ -30,3 +30,7 @@ v2.0.0
 
 v2.0.1
 *   fixed typo in readme install instructions
+
+v2.0.2
+*   reworked imports to use PIL if available
+*   updated readme/readme.txt

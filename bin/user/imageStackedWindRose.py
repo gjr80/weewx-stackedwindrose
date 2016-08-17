@@ -16,6 +16,7 @@
 # Revision History
 #  15 August 2016   v2.0.2
 #       -   Reworked imports to use PIL if available
+#       -   Updated readme/readme.txt
 #   9 August 2016   v2.0.1
 #       -   Fixed typo in install instructions
 #   8 August 2016   v2.0.0
@@ -57,7 +58,7 @@ import math
 import os.path
 import syslog
 import time
-# try to import from PIL or revert to python-imaging if an error
+# first try to import from PIL then revert to python-imaging if an error
 try:
     from PIL import Image, ImageDraw
 except ImportError:
