@@ -1,9 +1,9 @@
-# Stacked Windrose Image Generator for weewx
+# Windrose Image Generator for weewx
 
 ## Description
 The Stacked Windrose Image Generator for weewx is a weewx extension that generates a polar windrose plot image file based upon weewx archive data. The image file is suitable for publishing on a web page, inclusing in a weewx template or for use elsewhere.
 
-The extension consists of a single weewx skin that controls a custom image generator. Various image parameters including the plot period, source data field, units of measure and colours can be controlled through settings in weewx.conf.
+The extension consists of a single weewx skin that controls a custom image generator. Various image parameters including the plot period, source data field, units of measure and colours can be controlled through settings in `weewx.conf`.
 
 
 ## Pre-Requisites
@@ -13,20 +13,20 @@ Weewx v3.2.0 or greater.
 
 ## File Locations
 
-As Weewx file locations vary by system and installation method, the following symbolic names, as per the Weewx User's Guide - Installing Weewx, are used in these instructions: 
+As `weewx` file locations vary by system and installation method, the following symbolic names, as per the User's Guide to the weewx Weather System - [Installing Weewx](http://weewx.com/docs/usersguide.htm#installing), are used in these instructions: 
 
-- $BIN_ROOT (Executables)  
-- $SKIN_ROOT (Skins and templates)  
-- $HTML_ROOT (Web pages and images)  
+- $BIN_ROOT (executables)  
+- $SKIN_ROOT (skins and templates)  
+- $HTML_ROOT (web pages and images)  
 
 Where applicable the nominal location for your system and installation type should be used in place of the symbolic name
 
 
 ## Installation Instructions
 
-1.	Download the Stacked Windrose Image Generator for weewx extension package from the [Releases](https://github.com/gjr80/StackedWindRose/releases "StackedWindRose Releases page on GitHub") page. The current release oackage is named `stackedwindrose-2.0.2.tar.gz`. If your weewx PC has internet access you may be able to download the package directly as follows:
+1.	Download the Stacked Windrose Image Generator for weewx extension package from the [Releases](https://github.com/gjr80/weewx-stackedwindrose/releases "weewx-stackedwindrose Releases page on GitHub") page. The current release package is named `stackedwindrose-2.0.2.tar.gz`. If your `weewx` PC has internet access you may be able to download the package directly as follows:
 
-		$ wget -P /var/tmp/ https://github.com/gjr80/StackedWindRose/releases/download/v2.0.2/stackedwindrose-2.0.2.tar.gz
+		$ wget -P /var/tmp/ https://github.com/gjr80/weewx-stackedwindrose/releases/download/v2.0.2/stackedwindrose-2.0.2.tar.gz
 
 1.	Run the installer:
 
@@ -34,7 +34,7 @@ Where applicable the nominal location for your system and installation type shou
     
     This command assumes the user is currently in the $BIN_ROOT folder.
 
-1.	Various attributes of the generated plot can be controlled through a number of settings in the `[StdReport]` `[[StackedWindRose]]` section in `weewx.conf`. This approach has the advantage of retaining user settings across upgrades of this extension but any change to these paramaters will require a weewx configuration reload or a weewx stop/start. The extension installer does not permit comments to be included in `weewx.conf` so the windrose plot parameters and explanatory notes are included below. Commonly changed options include the units of measure (`group_speed` parameter) and date-time format (`time_stamp` parameter). Edit any parameters as required:
+1.	Various attributes of the generated plot can be controlled through a number of settings in the `[StdReport]` `[[StackedWindRose]]` section in `weewx.conf`. This approach has the advantage of retaining user settings across upgrades of this extension but any change to these paramaters will require a `weewx` configuration reload or a `weewx` stop/start. The extension installer does not permit comments to be included in `weewx.conf` so the windrose plot parameters and explanatory notes are included below. Commonly changed options include the units of measure (`group_speed` parameter) and date-time format (`time_stamp` parameter). Edit any parameters as required:
 
 	    [[StackedWindRose]]
 	        skin = StackedWindRose
@@ -176,27 +176,27 @@ Where applicable the nominal location for your system and installation type shou
 	                        time_stamp_location = bottom, right
 
 
-1.	By default the Stacked Windrose Image Generator for Weewx generator places the generated file in the `$HTML_ROOT` folder. If you wish to place the generated files in another directory then insert a `HTML_ROOT` setting giving the applicable folder under the `[[StackedWindRose]]` sub-section in the `[StdReport]` section of `weewx.conf`, eg
+1.	By default the Stacked Windrose Image Generator for weewx generator places the generated file in the `$HTML_ROOT` folder. If you wish to place the generated files in another directory then insert a `HTML_ROOT` setting giving the applicable folder under the `[[StackedWindRose]]` sub-section in the `[StdReport]` section of `weewx.conf`, eg:
 
 	    [[StackedWindRose]]
 	        skin = StackedWindRose
 	        HTML_ROOT = /use/this/folder
 
-1.	Restart Weewx:
+1.	Restart `weewx`:
 
     	$ sudo /etc/init.d/weewx stop
 	    $ sudo /etc/init.d/weewx start
 
-1.	This will result in the windrose image file being generated during each report generation cycle. Generation can be confirmed by inspecting the weewx log, there should be a line similar to this amongst the report generation output: 
+1.	This will result in the windrose image file being generated during each report generation cycle. Generation can be confirmed by inspecting the `weewx` log, there should be a line similar to this amongst the report generation output: 
 
 		Aug  9 00:30:16 jessie2 weewx[1236]: imageStackedWindRose: Generated 1 images for StackedWindRose in 0.01 seconds
 
 
 ## Manual Installation Instructions
 
-1.	Download the Stacked Windrose Image Generator for weewx extension package from the [Releases](https://github.com/gjr80/StackedWindRose/releases "StackedWindRose Releases page on GitHub") page. The current release oackage is named `stackedwindrose-2.0.2.tar.gz`. If your weewx PC has internet access you may be able to download the package directly as follows:
+1.	Download the Stacked Windrose Image Generator for weewx extension package from the [Releases](https://github.com/gjr80/weewx-stackedwindrose/releases "weewx-stackedwindrose Releases page on GitHub") page. The current release oackage is named `stackedwindrose-2.0.2.tar.gz`. If your `weewx` PC has internet access you may be able to download the package directly as follows:
 
-		$ wget -P /var/tmp/ https://github.com/gjr80/StackedWindRose/releases/download/v2.0.2/stackedwindrose-2.0.2.tar.gz
+		$ wget -P /var/tmp/ https://github.com/gjr80/weewx-stackedwindrose/releases/download/v2.0.2/stackedwindrose-2.0.2.tar.gz
 
 1.	Extract the files from the tar.gz file:
 
@@ -206,7 +206,7 @@ Where applicable the nominal location for your system and installation type shou
 
 1.	Copy files as follows:
 
-	    $ cp /var/tmp/stackedwindrose/bin/user/imageStackedWindRose.py $BIN_ROOT/user
+	$ cp /var/tmp/stackedwindrose/bin/user/imageStackedWindRose.py $BIN_ROOT/user
     	$ cp -R /var/tmp/stackedwindrose/skins/* $SKIN_ROOT
 
 1.	In `weewx.conf`, modify the `[StdReport]` section by adding the following sub-section:
@@ -214,7 +214,7 @@ Where applicable the nominal location for your system and installation type shou
 	    [[StackedWindRose]]
 	        skin = StackedWindRose
 
-1.	Various attributes of the generated plot can be controlled through a number of settings in the `[StdReport]` `[[StackedWindRose]]` section in `weewx.conf`. This approach has the advantage of retaining user settings across upgrades of this extension but any change to these paramaters will require a weewx configuration reload or a weewx stop/start. The extension installer does not permit comments to be included in `weewx.conf` so the windrose plot parameters and explanatory notes are included below. Commonly changed options include the units of measure (`group_speed` parameter) and date-time format (`time_stamp` parameter). Edit any parameters as required:
+1.	Various attributes of the generated plot can be controlled through a number of settings in the `[StdReport]` `[[StackedWindRose]]` section in `weewx.conf`. This approach has the advantage of retaining user settings across upgrades of this extension but any change to these paramaters will require a `weewx` configuration reload or a `weewx` stop/start. The extension installer does not permit comments to be included in `weewx.conf` so the windrose plot parameters and explanatory notes are included below. Commonly changed options include the units of measure (`group_speed` parameter) and date-time format (`time_stamp` parameter). Edit any parameters as required:
 
 	    [[StackedWindRose]]
 	        skin = StackedWindRose
@@ -355,7 +355,7 @@ Where applicable the nominal location for your system and installation type shou
 	
 	                        time_stamp_location = bottom, right
 
-1.	By default the Stacked Windrose Image Generator for Weewx generator places the generated file in the `$HTML_ROOT` folder. If you wish to place the generated files in another directory then insert a `HTML_ROOT` setting giving the applicable folder under the `[[StackedWindRose]]` sub-section in the `[StdReport]` section of `weewx.conf`, eg
+1.	By default the Stacked Windrose Image Generator for weewx generator places the generated file in the `$HTML_ROOT` folder. If you wish to place the generated files in another directory then insert a `HTML_ROOT` setting giving the applicable folder under the `[[StackedWindRose]]` sub-section in the `[StdReport]` section of `weewx.conf`, eg:
 
 	    [[StackedWindRose]]
 	        skin = StackedWindRose
@@ -364,9 +364,9 @@ Where applicable the nominal location for your system and installation type shou
 1.	Restart Weewx:
 
     	$ sudo /etc/init.d/weewx stop
-	    $ sudo /etc/init.d/weewx start
+        $ sudo /etc/init.d/weewx start
 
-1.	This will result in the windrose image file being generated during each report generation cycle. Generation can be confirmed by inspecting the weewx log, there should be a line similar to this amongst the report generation output: 
+1.	This will result in the windrose image file being generated during each report generation cycle. Generation can be confirmed by inspecting the `weewx` log, there should be a line similar to this amongst the report generation output: 
 
 		Aug  9 00:30:16 jessie2 weewx[1236]: imageStackedWindRose: Generated 1 images for StackedWindRose in 0.01 seconds
 
@@ -381,7 +381,7 @@ Where applicable the nominal location for your system and installation type shou
 
 1.  Restart weewx:
 
-  	  	$ sudo /etc/init.d/weewx stop
+  	$ sudo /etc/init.d/weewx stop
     	$ sudo /etc/init.d/weewx start
 
 
