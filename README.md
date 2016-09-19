@@ -1,9 +1,9 @@
 # Windrose Image Generator for weewx
 
 ## Description
-The Stacked Windrose Image Generator for weewx is a weewx extension that generates a polar windrose plot image file based upon weewx archive data. The image file is suitable for publishing on a web page, inclusing in a weewx template or for use elsewhere.
+The Stacked Windrose Image Generator for weewx is a `weewx` extension that generates a polar windrose plot image file based upon `weewx` archive data. The image file is suitable for publishing on a web page, inclusing in a `weewx` template or for use elsewhere.
 
-The extension consists of a single weewx skin that controls a custom image generator. Various image parameters including the plot period, source data field, units of measure and colours can be controlled through settings in `weewx.conf`.
+The extension consists of a single `weewx` skin that controls a custom image generator. Various image parameters including the plot period, source data field, units of measure and colours can be controlled through settings in `weewx.conf`.
 
 
 ## Pre-Requisites
@@ -361,7 +361,7 @@ Where applicable the nominal location for your system and installation type shou
 	        skin = StackedWindRose
 	        HTML_ROOT = /use/this/folder
 
-1.	Restart Weewx:
+1.	Restart `weewx`:
 
     	$ sudo /etc/init.d/weewx stop
         $ sudo /etc/init.d/weewx start
@@ -379,7 +379,7 @@ Where applicable the nominal location for your system and installation type shou
 
     This command assumes the user is currently in the $BIN_ROOT folder.
 
-1.  Restart weewx:
+1.  Restart `weewx`:
 
   	$ sudo /etc/init.d/weewx stop
     	$ sudo /etc/init.d/weewx start
