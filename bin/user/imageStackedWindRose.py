@@ -1,57 +1,61 @@
+# imageStackedWindRose.py
 #
-#   Copyright (c) 2013-2016 Gary Roderick <gjroderick(at)gmail.com>
+# A weeWX generator to generate a polar windrose plot image file based upon
+# weeWX archive data.
 #
-# This program is free software; you can redistribute it and/or modify it
-# under the terms of the GNU General Public License as published by the Free
-# Software Foundation; either version 3 of the License, or (at your option)
-# any later version.
+#   Copyright (c) 2013-2017 Gary Roderick           gjroderick<at>gmail.com
+#
+# This program is free software: you can redistribute it and/or modify it under
+# the terms of the GNU General Public License as published by the Free
+# Software Foundation, either version 3 of the License, or (at your option) any
+# later version.
 #
 # This program is distributed in the hope that it will be useful, but WITHOUT
-# ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or
-# FITNESS FOR A PARTICULAR PURPOSE.  See the GNU General Public License for
-# more details.
+# ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
+# FOR A PARTICULAR PURPOSE.  See the GNU General Public License for more
+# details.
 #
-# Version: 2.0.2.                                      Date: 15 August 2016
+# You should have received a copy of the GNU General Public License along with
+# this program.  If not, see http://www.gnu.org/licenses/.
+#
+# Version: 2.1.0                                        Date: 13 March 2017
 #
 # Revision History
-#  15 August 2016   v2.0.2
-#       -   Reworked imports to use PIL if available
-#       -   Updated readme/readme.txt
-#   9 August 2016   v2.0.1
-#       -   Fixed typo in install instructions
-#   8 August 2016   v2.0.0
-#       -   Packaged as a standalone weewx extension.
-#       -   Added unit conversion for wind speed (seems it only ever used the
-#           archive units).
-#       -   Restructured the ImageStackedWindRoseGenerator class.
-#       -   Removed a number of unused imports and properties.
-#       -   Various formatting changes, mainly shortening of variable/property
-#           names.
-#
-#   August 2015     v1.2.0
-#       -   Revised for Weewx v3.2.0.
+#   13 March 2017       v2.1.0
+#       -   fixed error resulting from change to ? signature
+#       -   revised these comments
+#   15 August 2016      v2.0.2
+#       -   reworked imports to use PIL if available
+#       -   updated readme/readme.txt
+#   9 August 2016       v2.0.1
+#       -   fixed typo in install instructions
+#   8 August 2016       v2.0.0
+#       -   packaged as a standalone weewx extension
+#       -   added unit conversion for wind speed (seems it only ever used the
+#           archive units)
+#       -   restructured the ImageStackedWindRoseGenerator class
+#       -   removed a number of unused imports and properties
+#       -   various formatting changes, mainly shortening of variable/property
+#           names
+#   August 2015         v1.2.0
+#       -   revised for weeWX 3.2.0
 #       -   Fixed issue whereby a fatal error was thrown if
 #           imageStackedWindRose could not find the font specified in
 #           skin.conf. Error is now trapped and a default system font used
 #           instead.
-#
-#   10 January 2015  v1.0.0
-#       -   Rewritten for Weewx v3.0.0.
-#
-#   1 May 2014       v0.9.3
-#       -   Fixed issue that arose with Weewx 2.6.3 now allowing use of UTF-8
-#           characters in plots.
-#       -   Fixed logic error in code that calculates size of windrose
-#           'petals'.
-#       -   Removed unnecessary import statements.
-#       -   Tweaked windrose size calculations to better cater for labels on
-#           the plot.
-#
-#   30 July 2013     v0.9.1
-#       -   Revised version number to align with Weewx-WD version numbering.
-#
-#   20 July 2013     v0.1
-#       -   Initial implementation
+#   10 January 2015     v1.0.0
+#       -   rewritten for weeWX 3.0.0
+#   1 May 2014          v0.9.3
+#       -   fixed issue that arose with weeWX 2.6.3 now allowing use of UTF-8
+#           characters in plots
+#       -   fixed logic error in code that calculates size of windrose 'petals'
+#       -   removed unnecessary import statements
+#       -   tweaked windrose size calculations to better cater for labels on
+#           the plot
+#   30 July 2013        v0.9.1
+#       -   revised version number to align with weeWX-WD version numbering
+#   20 July 2013        v0.1.0
+#       -   initial release
 #
 
 import math
@@ -92,13 +96,15 @@ class ImageStackedWindRoseGenerator(weewx.reportengine.ReportGenerator):
     settings in the [Stdreport] [[StackedWindRose]] section of weewx.conf.
     """
 
-    def __init__(self, config_dict, skin_dict, gen_ts, first_run, stn_info):
+    def __init__(self, config_dict, skin_dict, gen_ts,
+                 first_run, stn_info, record=None):
         # Initialise my superclass
         super(ImageStackedWindRoseGenerator, self).__init__(config_dict,
                                                             skin_dict,
                                                             gen_ts,
                                                             first_run,
-                                                            stn_info)
+                                                            stn_info,
+                                                            record)
 
         # Get a manager for our archive
         _binding = self.config_dict['StdArchive'].get('data_binding',
