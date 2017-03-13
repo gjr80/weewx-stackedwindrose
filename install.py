@@ -11,29 +11,48 @@
 #
 # Installer for StackedWindRose Image Generator Extension
 #
-# Version: 2.0.2                                      Date: 15 August 2016
+# Version: 2.1.0                                      Date: 13 March 2017
 #
 # Revision History
-#  15 August 2016   v2.0.2
+#   13 March 2017       v2.1.0
+#       -   fixed error resulting from change to class
+#           reportengine.ReportGenerator signature introduced in weeWX 3.7.0
+#       -   added weeWX version check to installer
+#       -   revised imageStackedWindRose.py comments
+#   15 August 2016      v2.0.2
 #       -   Reworked imports to use PIL if available
 #       -   Updated readme/readme.txt
-#   9 August 2016   v2.0.1
+#   9 August 2016       v2.0.1
 #       -   Fixed typo in install instructions
-#   8 August 2016   v2.0.0  
+#   8 August 2016       v2.0.0
 #       -   Initial implementation
 #
 
+# python imports
+from distutils.version import StrictVersion
+
+# weeWX imports
+import weewx
+
 from setup import ExtensionInstaller
+
+REQUIRED_VERSION = "3.2.0"
+IMAGESTACKEDWINDROSE_VERSION = "2.1.0"
 
 def loader():
     return StackedWindRoseInstaller()
 
 class StackedWindRoseInstaller(ExtensionInstaller):
     def __init__(self):
+        if StrictVersion(weewx.__version__) < StrictVersion(REQUIRED_VERSION):
+            msg = "%s requires weeWX %s or greater, found %s" % (''.join(('StackedWindRose ', IMAGESTACKEDWINDROSE_VERSION)),
+                                                                 REQUIRED_VERSION,
+                                                                 weewx.__version__)
+            raise weewx.UnsupportedFeature(msg)
         super(StackedWindRoseInstaller, self).__init__(
-            version="2.0.2",
+            version="2.1.0",
             name='StackedWindRose',
-            description='Stacked windrose image generator for weewx.',
+            description='Stacked windrose image generator for weeWX.',
             author="Gary Roderick",
             author_email="gjroderick@gmail.com",
             config={
