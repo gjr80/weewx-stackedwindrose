@@ -3,7 +3,7 @@
 # A weeWX generator to generate a polar windrose plot image file based upon
 # weeWX archive data.
 #
-#   Copyright (c) 2013-2017 Gary Roderick           gjroderick<at>gmail.com
+#   Copyright (c) 2013-2018 Gary Roderick           gjroderick<at>gmail.com
 #
 # This program is free software: you can redistribute it and/or modify it under
 # the terms of the GNU General Public License as published by the Free
@@ -18,9 +18,12 @@
 # You should have received a copy of the GNU General Public License along with
 # this program.  If not, see http://www.gnu.org/licenses/.
 #
-# Version: 2.1.0                                        Date: 13 March 2017
+# Version: 2.1.1                                        Date: 9 October 2018
 #
 # Revision History
+#   9 October 2018      v2.1.1
+#       -   now respects log_success and log_failure config options
+#       -   minor reformatting/typos
 #   13 March 2017       v2.1.0
 #       -   fixed error resulting from change to ? signature
 #       -   revised these comments
@@ -72,7 +75,7 @@ import weewx.reportengine
 
 from datetime import datetime as dt
 from weeplot.utilities import get_font_handle
-from weeutil.weeutil import accumulateLeaves, option_as_list, TimeSpan
+from weeutil.weeutil import accumulateLeaves, option_as_list, TimeSpan, to_bool
 from weewx.units import Converter
 
 STACKED_WINDROSE_VERSION = '2.0.2'
@@ -110,6 +113,9 @@ class ImageStackedWindRoseGenerator(weewx.reportengine.ReportGenerator):
         _binding = self.config_dict['StdArchive'].get('data_binding',
                                                       'wx_binding')
         self.archive = self.db_binder.get_manager(_binding)
+
+        self.log_success = to_bool(skin_dict.get('log_success', True))
+        self.log_failure = to_bool(skin_dict.get('log_failure', True))
 
         # Set a few properties we will need
         self.image_dict = self.skin_dict['ImageStackedWindRoseGenerator']
@@ -456,9 +462,10 @@ class ImageStackedWindRoseGenerator(weewx.reportengine.ReportGenerator):
                 #Save the file.
                 self.image.save(img_file)
                 ngen += 1
-        syslog.syslog(syslog.LOG_INFO, "imageStackedWindRose: Generated %d images for %s in %.2f seconds" % (ngen,
-                                                                                                             self.skin_dict['REPORT_NAME'],
-                                                                                                             time.time() - t1))
+        if self.log_success:
+            syslog.syslog(syslog.LOG_INFO, "imageStackedWindRose: Generated %d images for %s in %.2f seconds" % (ngen,
+                                                                                                                 self.skin_dict['REPORT_NAME'],
+                                                                                                                 time.time() - t1))
 
     def windRoseImageSetup(self):
         """Create image object to draw on."""
@@ -685,9 +692,10 @@ class ImageStackedWindRoseGenerator(weewx.reportengine.ReportGenerator):
         # Images without a period must be skipped every time and a syslog
         # entry added. This should never occur, but....
         if self.period is None:
-            syslog.syslog(syslog.LOG_INFO, "imageStackedWindRose: Plot " +
-                                            plotname +
-                                            " ignored, no period specified")
+            if self.log_failure:
+                syslog.syslog(syslog.LOG_INFO, "imageStackedWindRose: Plot " +
+                                               plotname +
+                                               " ignored, no period specified")
             return True
 
         # The image definitely has to be generated if it doesn't exist.
