@@ -78,7 +78,7 @@ from weeplot.utilities import get_font_handle
 from weeutil.weeutil import accumulateLeaves, option_as_list, TimeSpan, to_bool
 from weewx.units import Converter
 
-STACKED_WINDROSE_VERSION = '2.0.2'
+STACKED_WINDROSE_VERSION = '2.1.1'
 
 DEFAULT_PETAL_COLORS = ['lightblue', 'blue', 'midnightblue', 'forestgreen',
                         'limegreen', 'green', 'greenyellow']
