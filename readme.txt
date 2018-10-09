@@ -29,15 +29,15 @@ Installation Instructions
 
 1)  Download the Stacked Windrose Image Generator for WeeWX extension from the
 Release (https://github.com/gjr80/weewx-stackedwindrose/releases) page. The
-current release package is named stackedwindrose-2.0.2.tar.gz. If your WeeWX PC
+current release package is named stackedwindrose-2.1.1.tar.gz. If your WeeWX PC
 has internet access you may be able to download the package directly as
 follows:
 
-    $ wget -P /var/tmp/ https://github.com/gjr80/weewx-stackedwindrose/releases/download/v2.1.0/stackedwindrose-2.1.0.tar.gz
+    $ wget -P /var/tmp/ https://github.com/gjr80/weewx-stackedwindrose/releases/download/v2.1.1/stackedwindrose-2.1.1.tar.gz
 
 2)  Run the installer:
 
-    $ ./wee_extension --install=/var/tmp/stackedwindrose-2.1.0.tar.gz
+    $ ./wee_extension --install=/var/tmp/stackedwindrose-2.1.1.tar.gz
 
     This command assumes the user is currently in the $BIN_ROOT folder.
 
@@ -220,15 +220,15 @@ Manual Installation Instructions
 
 1)  Download the Stacked Windrose Image Generator for WeeWX extension from the
 Release (https://github.com/gjr80/weewx-stackedwindrose/releases) page. The
-current release package is named stackedwindrose-2.0.2.tar.gz. If your WeeWX PC
+current release package is named stackedwindrose-2.1.1.tar.gz. If your WeeWX PC
 has internet access you may be able to download the package directly as
 follows:
 
-    $ wget -P /var/tmp/ https://github.com/gjr80/weewx-stackedwindrose/releases/download/v2.1.0/stackedwindrose-2.1.0.tar.gz
+    $ wget -P /var/tmp/ https://github.com/gjr80/weewx-stackedwindrose/releases/download/v2.1.1/stackedwindrose-2.1.1.tar.gz
 
 2)  Extract the files from the tar.gz file:
 
-    $ tar -zxvf /var/tmp/stackedwindrose-2.1.0.tar.gz -C /var/tmp
+    $ tar -zxvf /var/tmp/stackedwindrose-2.1.1.tar.gz -C /var/tmp
 
 3)  Copy files as follows:
 

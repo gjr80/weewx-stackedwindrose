@@ -11,9 +11,11 @@
 #
 # Installer for StackedWindRose Image Generator Extension
 #
-# Version: 2.1.0                                      Date: 13 March 2017
+# Version: 2.1.1                                      Date: 9 October 2018
 #
 # Revision History
+#   9 October 2018      v2.1.1
+#       -   version bump only
 #   13 March 2017       v2.1.0
 #       -   fixed error resulting from change to class
 #           reportengine.ReportGenerator signature introduced in weeWX 3.7.0
@@ -37,7 +39,7 @@ import weewx
 from setup import ExtensionInstaller
 
 REQUIRED_VERSION = "3.2.0"
-IMAGESTACKEDWINDROSE_VERSION = "2.1.0"
+IMAGESTACKEDWINDROSE_VERSION = "2.1.1"
 
 def loader():
     return StackedWindRoseInstaller()
