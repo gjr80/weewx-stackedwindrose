@@ -161,8 +161,9 @@ class ImageStackedWindRoseGenerator(weewx.reportengine.ReportGenerator):
             try:
                 # Can it be converted to a number?
                 self.petal_colors.append(int(_color, 0))
-            except ValueError:  # Cannot convert to a number, assume it is
-                                # a colour word so append it as is
+            except ValueError:
+                # Cannot convert to a number, assume it is a colour word so
+                # append it as is
                 self.petal_colors.append(_color)
         # Get petal width, if not defined then set default to 16 (degrees)
         try:
@@ -210,7 +211,7 @@ class ImageStackedWindRoseGenerator(weewx.reportengine.ReportGenerator):
         # Time period taken to generate plots, set plot count to 0
         t1 = time.time()
         ngen = 0
-        # Loop over each time span class (day, week, month, etc.):
+        # Loop over each time span class (day, week, month, etc.)
         for span in self.image_dict.sections:
             # Now, loop over all plot names in this time span class:
             for plot in self.image_dict[span].sections:
@@ -280,7 +281,7 @@ class ImageStackedWindRoseGenerator(weewx.reportengine.ReportGenerator):
                     elif self.obName == 'windGust':
                         self.dirName = 'windGustDir'
                     else:
-                        self.obName == 'windSpeed'
+                        self.obName = 'windSpeed'
                         self.dirName = 'windDir'
                     # Get our data tuples for speed and direction.
                     vector_tspan = TimeSpan(self.p_gen_ts - self.period + 1,
