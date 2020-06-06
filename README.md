@@ -177,14 +177,15 @@ has internet access you may be able to download the package directly as follows:
                             
                             time_stamp_location = bottom, right
 
-1.	By default the Stacked Windrose Image Generator generator places the generated file in the `$HTML_ROOT` directory. If you wish to place the generated files in another directory then insert a `HTML_ROOT` setting giving the applicable directory under the `[[StackedWindRose]]` sub-section in the
+1. By default the Stacked Windrose Image Generator generator places the generated file in the `$HTML_ROOT` directory. If you wish to place the generated files in another directory then insert a `HTML_ROOT` setting giving the applicable directory under the `[[StackedWindRose]]` sub-section in the
 `[StdReport]` section of `weewx.conf`, eg:
 
-    [[StackedWindRose]]
-	    skin = StackedWindRose
-	    HTML_ROOT = /use/this/folder
+        [[StackedWindRose]]
+	        skin = StackedWindRose
+	        HTML_ROOT = /use/this/folder
 
 1.	Restart *WeeWX*:
+
 
     $ sudo /etc/init.d/weewx restart
 
