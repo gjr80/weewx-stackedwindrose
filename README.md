@@ -397,7 +397,7 @@ Upgrade Instructions
 
 - Delete the legacy file imageStackedWindRose.py if it exists:
 
-        $ rm $BIN_ROOT/user/imageStackedWindRose.py
+    $ rm $BIN_ROOT/user/imageStackedWindRose.py
 
 - The `[[[ImageStackedWindRoseGenerator]]]` stanza under `[StdReport] [[StackedWindRose]]` in `weewx.conf` has been renamed to `[[[StackedWindRoseImageGenerator]]]` in v3.0.0 and later. After the upgrade you will likely have both a `[[[ImageStackedWindRoseGenerator]]]` stanza and a `[[[StackedWindRoseImageGenerator]]]` stanza. If you have customised any settings under `[[[ImageStackedWindRoseGenerator]]]` you may wish to copy those customisations to `[[[StackedWindRoseImageGenerator]]]`. Once this is done you should delete the `[[[ImageStackedWindRoseGenerator]]]` stanza.
     
