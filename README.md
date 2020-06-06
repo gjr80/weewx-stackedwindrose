@@ -189,17 +189,17 @@ has internet access you may be able to download the package directly as follows:
 
         $ sudo /etc/init.d/weewx restart
 
-or
+    or
 
-    $ sudo service weewx restart
+        $ sudo service weewx restart
 
-or
+    or
 
-    $ sudo systemctl restart weewx
+        $ sudo systemctl restart weewx
 
 1.	This will result in the windrose image file being generated during each report generation cycle. Generation can be confirmed by inspecting the *WeeWX* log, there should be a line similar to this amongst the report generation output:
 
-    Jun  6 09:26:16 buster30 weewx[1476] INFO user.stackedwindrose: Generated 1 images for StackedWindRose in 0.02 seconds
+        Jun  6 09:26:16 buster30 weewx[1476] INFO user.stackedwindrose: Generated 1 images for StackedWindRose in 0.02 seconds
 
 ## Manual Installation Instructions
 
