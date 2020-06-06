@@ -12,9 +12,11 @@ This program is distributed in the hope that it will be useful, but WITHOUT ANY
 WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A
 PARTICULAR PURPOSE.  See the GNU General Public License for more details.
 
-Version: 3.0.0                                          Date: 5 June 2020
+Version: 3.0.1                                          Date: 7 June 2020
 
 Revision History
+  7 June 2020           v3.0.1
+      - fix issue with chnaged max() behaviour under python3
   5 June 2020           v3.0.0
       - renamed this file and various classes, methods and variables
       - reformatting to remove numerous long lines
@@ -333,7 +335,7 @@ class StackedWindRoseImageGenerator(weewx.reportengine.ReportGenerator):
                     # convert the speeds to units to be used in the plot
                     speed_data = weewx.units.convert(_sp_vec, self.units)
                     # find maximum speed from our data
-                    _max_speed = max(speed_data.value)
+                    _max_speed = weeutil.weeutil.max_with_none(speed_data.value)
                     # set upper speed range for our plot, set to a multiple of
                     # 10 for a neater display
                     _max_speed_range = (int(_max_speed / 10.0) + 1) * 10
