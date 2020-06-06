@@ -203,27 +203,27 @@ has internet access you may be able to download the package directly as follows:
 
 ## Manual Installation Instructions
 
-1.	Download the Stacked Windrose Image Generator extension from the
+1. Download the Stacked Windrose Image Generator extension from the
 [Releases](https://github.com/gjr80/weewx-stackedwindrose/releases "weewx-stackedwindrose Releases page on GitHub") page. The current release package is named `stackedwindrose-3.0.0.tar.gz`. If your *WeeWX* PC
 has internet access you may be able to download the package directly as follows:
 
-    $ wget -P /var/tmp/ https://github.com/gjr80/weewx-stackedwindrose/releases/download/v3.0.0/stackedwindrose-3.0.0.tar.gz
+        $ wget -P /var/tmp/ https://github.com/gjr80/weewx-stackedwindrose/releases/download/v3.0.0/stackedwindrose-3.0.0.tar.gz
 
-1.	Extract the files from the tar.gz file:
+1. Extract the files from the tar.gz file:
 
-    $ tar -zxvf /var/tmp/stackedwindrose-3.0.0.tar.gz -C /var/tmp
+        $ tar -zxvf /var/tmp/stackedwindrose-3.0.0.tar.gz -C /var/tmp
 
-**Note**: This will extract the extension package files to the `/var/tmp` folder
+    **Note**: This will extract the extension package files to the `/var/tmp` folder
 
-1.	Copy files as follows:
+1. Copy files as follows:
 
-	$ cp /var/tmp/stackedwindrose/bin/user/stackedwindrose.py $BIN_ROOT/user
-    $ cp -R /var/tmp/stackedwindrose/skins/* $SKIN_ROOT
+	    $ cp /var/tmp/stackedwindrose/bin/user/stackedwindrose.py $BIN_ROOT/user
+        $ cp -R /var/tmp/stackedwindrose/skins/* $SKIN_ROOT
 
-1.	In `weewx.conf`, modify the `[StdReport]` section by adding the following sub-section:
+1. In `weewx.conf`, modify the `[StdReport]` section by adding the following sub-section:
 
-    [[StackedWindRose]]
-        skin = StackedWindRose
+        [[StackedWindRose]]
+            skin = StackedWindRose
 
 1.	Various attributes of the generated plot can be controlled through a number of settings in the `[StdReport]` `[[StackedWindRose]]` section in `weewx.conf`. This approach has the advantage of retaining user settings across upgrades of this extension but any change to these parameters will require a *WeeWX* configuration reload or a *WeeWX* restart. The extension installer does not permit comments to be included in `weewx.conf` so the windrose plot parameters and explanatory notes are included below. Commonly changed options include the units of measure (`group_speed` parameter) and date-time format (`time_stamp` parameter). Edit any parameters as required:
 
