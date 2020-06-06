@@ -36,9 +36,9 @@ has internet access you may be able to download the package directly as follows:
 
     This command assumes the user is currently in the $BIN_ROOT folder. If this is not the case you may need to include the path to `wee_extension`.
 
-1.	Various attributes of the generated plot can be controlled through a number of settings in the `[StdReport]` `[[StackedWindRose]]` section in `weewx.conf`. This approach has the advantage of retaining user settings across upgrades of this extension but any change to these parameters will require a *WeeWX* configuration reload or a *WeeWX* restart. The extension installer does not permit comments to be included in `weewx.conf` so the windrose plot parameters and explanatory notes are included below. Commonly changed options include the units of measure (`group_speed` parameter) and date-time format (`time_stamp` parameter). Edit any parameters as required:
+1. Various attributes of the generated plot can be controlled through a number of settings in the `[StdReport]` `[[StackedWindRose]]` section in `weewx.conf`. This approach has the advantage of retaining user settings across upgrades of this extension but any change to these parameters will require a *WeeWX* configuration reload or a *WeeWX* restart. The extension installer does not permit comments to be included in `weewx.conf` so the windrose plot parameters and explanatory notes are included below. Commonly changed options include the units of measure (`group_speed` parameter) and date-time format (`time_stamp` parameter). Edit any parameters as required:
 
-    [[StackedWindRose]]
+       [[StackedWindRose]]
         skin = StackedWindRose
 
         [[[Units]]]
