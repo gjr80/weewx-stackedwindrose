@@ -1,45 +1,49 @@
-#
-# This program is free software; you can redistribute it and/or modify it
-# under the terms of the GNU General Public License as published by the Free
-# Software Foundation; either version 2 of the License, or (at your option)
-# any later version.
-#
-# This program is distributed in the hope that it will be useful, but WITHOUT
-# ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or
-# FITNESS FOR A PARTICULAR PURPOSE.  See the GNU General Public License for
-# more details.
-#
-# Installer for StackedWindRose Image Generator Extension
-#
-# Version: 2.1.1                                      Date: 9 October 2018
-#
-# Revision History
-#   9 October 2018      v2.1.1
-#       -   version bump only
-#   13 March 2017       v2.1.0
-#       -   fixed error resulting from change to class
-#           reportengine.ReportGenerator signature introduced in weeWX 3.7.0
-#       -   added weeWX version check to installer
-#       -   revised imageStackedWindRose.py comments
-#   15 August 2016      v2.0.2
-#       -   Reworked imports to use PIL if available
-#       -   Updated readme/readme.txt
-#   9 August 2016       v2.0.1
-#       -   Fixed typo in install instructions
-#   8 August 2016       v2.0.0
-#       -   Initial implementation
-#
+"""
+This program is free software; you can redistribute it and/or modify it under
+the terms of the GNU General Public License as published by the Free Software
+Foundation; either version 2 of the License, or (at your option) any later
+version.
+
+This program is distributed in the hope that it will be useful, but WITHOUT ANY
+WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A
+PARTICULAR PURPOSE.  See the GNU General Public License for more details.
+
+Installer for StackedWindRose Image Generator Extension
+
+Version: 3.0.0                                      Date: 5 June 2020
+
+Revision History
+    5 June 2020         v3.0.0
+        -   minor tweaks/optimisation
+        -   changed generator python file name
+        -   changed 'period' to 'time_length'
+        -   revised comments formatting
+    9 October 2018      v2.1.1
+        -   version bump only
+    13 March 2017       v2.1.0
+        -   fixed error resulting from change to class
+            reportengine.ReportGenerator signature introduced in WeeWX 3.7.0
+        -   added weeWX version check to installer
+        -   revised imageStackedWindRose.py comments
+    15 August 2016      v2.0.2
+        -   Reworked imports to use PIL if available
+        -   Updated readme/readme.txt
+    9 August 2016       v2.0.1
+        -   Fixed typo in install instructions
+    8 August 2016       v2.0.0
+        -   Initial implementation
+"""
 
 # python imports
 from distutils.version import StrictVersion
 
-# weeWX imports
+# WeeWX imports
 import weewx
 
 from setup import ExtensionInstaller
 
 REQUIRED_VERSION = "3.2.0"
-IMAGESTACKEDWINDROSE_VERSION = "2.1.1"
+STACKEDWINDROSE_VERSION = "3.0.0"
 
 def loader():
     return StackedWindRoseInstaller()
@@ -47,14 +51,14 @@ def loader():
 class StackedWindRoseInstaller(ExtensionInstaller):
     def __init__(self):
         if StrictVersion(weewx.__version__) < StrictVersion(REQUIRED_VERSION):
-            msg = "%s requires weeWX %s or greater, found %s" % (''.join(('StackedWindRose ', IMAGESTACKEDWINDROSE_VERSION)),
+            msg = "%s requires WeeWX %s or greater, found %s" % (''.join(('StackedWindRose ', STACKEDWINDROSE_VERSION)),
                                                                  REQUIRED_VERSION,
                                                                  weewx.__version__)
             raise weewx.UnsupportedFeature(msg)
         super(StackedWindRoseInstaller, self).__init__(
-            version="2.1.0",
+            version=STACKEDWINDROSE_VERSION,
             name='StackedWindRose',
-            description='Stacked windrose image generator for weeWX.',
+            description='Stacked windrose image generator for WeeWX.',
             author="Gary Roderick",
             author_email="gjroderick@gmail.com",
             config={
@@ -98,7 +102,7 @@ class StackedWindRoseInstaller(ExtensionInstaller):
                             'windrose_plot_petal_colors': ['aqua', '0xFF9900', '0xFF3300', '0x009900', '0x00CC00', '0x33FF33', '0x00FFCC'],
                             'windrose_plot_petal_width': '16',
                             'day_images': {
-                                'period': '86400',
+                                'time_length': '86400',
                                 'daywindrose': {
                                     'format': 'png',
                                     'windSpeed': {
@@ -113,7 +117,7 @@ class StackedWindRoseInstaller(ExtensionInstaller):
                 }
             },
             files=[
-                ('bin/user', ['bin/user/imageStackedWindRose.py']),
+                ('bin/user', ['bin/user/stackedwindrose.py']),
                 ('skins/StackedWindRose', ['skins/StackedWindRose/skin.conf'])
             ]
         )
