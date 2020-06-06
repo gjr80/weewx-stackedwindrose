@@ -426,17 +426,41 @@ output:
 
 Upgrade Instructions
 
-1.  General. Existing Stacked Windrose Image Generator installations can be upgraded by installing the new version using the same installation method (wee_extension or a manual installation) as was used for the existing installation. In the case of an upgrade using wee_extension, weewx.conf will be automatically updated with a copy of the previous weewx.conf being saved as weewx.conf.YYYYMMDDHHMMSS where YYYYMMDDHHMMSS represents the date-time the upgrade was performed.
+1.  General. Existing Stacked Windrose Image Generator installations can be
+upgraded by installing the new version using the same installation method
+(wee_extension or a manual installation) as was used for the existing
+installation. In the case of an upgrade using wee_extension, weewx.conf will
+be automatically updated with a copy of the previous weewx.conf being saved as
+weewx.conf.YYYYMMDDHHMMSS where YYYYMMDDHHMMSS represents the date-time the
+upgrade was performed.
 
-2.  Upgrading from v2.1.1 and earlier. Due to a number of name changes in the Stacked Windrose Image Generator v3.0.0 users upgrading from an earlier Stacked Windrose Image Generator version to version 3.0.0 or later will need to complete a number of manual steps after upgrading the Stacked Windrose Image Generator. These steps are:
+2.  Upgrading from v2.1.1 and earlier. Due to a number of name changes in the
+Stacked Windrose Image Generator v3.0.0 users upgrading from an earlier Stacked
+Windrose Image Generator version to version 3.0.0 or later will need to
+complete a number of manual steps after upgrading the Stacked Windrose Image
+Generator. These steps are:
 
 -   Delete the legacy file imageStackedWindRose.py if it exists:
 
         $ rm $BIN_ROOT/user/imageStackedWindRose.py
 
--   The [[[ImageStackedWindRoseGenerator]]] stanza under [StdReport] [[StackedWindRose]] in weewx.conf has been renamed to [[[StackedWindRoseImageGenerator]]] in v3.0.0 and later. After the upgrade you will likely have both a [[[ImageStackedWindRoseGenerator]]] stanza and a [[[StackedWindRoseImageGenerator]]] stanza. If you have customised any settings under [[[ImageStackedWindRoseGenerator]]] you may wish to copy those customisations to [[[StackedWindRoseImageGenerator]]]. Once this is done you should delete the [[[ImageStackedWindRoseGenerator]]] stanza.
+-   The [[[ImageStackedWindRoseGenerator]]] stanza under [StdReport]
+[[StackedWindRose]] in weewx.conf has been renamed to
+[[[StackedWindRoseImageGenerator]]] in v3.0.0 and later. After the upgrade you
+will likely have both a [[[ImageStackedWindRoseGenerator]]] stanza and a
+[[[StackedWindRoseImageGenerator]]] stanza. If you have customised any settings
+under [[[ImageStackedWindRoseGenerator]]] you may wish to copy those
+customisations to [[[StackedWindRoseImageGenerator]]]. Once this is done you
+should delete the [[[ImageStackedWindRoseGenerator]]] stanza.
 
--   In line with WeeWX norms the config option used to set the time period covered by a plot has been renamed from 'period' to 'time_length'. In order to maintain backwards compatibility the Stacked Windrose Image Generator v3.0.0 or later will continue to use the 'period' config option if it exists; however, any use of the 'time_length' option will override any 'period' option'. To avoid confusion you may wish to rename any occurrences of 'period' under [StdReport] [[StackedWindRose]] in weewx.conf to 'time_length' ensuring you do not have any duplicate 'time_length' entries.
+-   In line with WeeWX norms the config option used to set the time period
+covered by a plot has been renamed from 'period' to 'time_length'. In order
+to maintain backwards compatibility the Stacked Windrose Image Generator v3.0.0
+or later will continue to use the 'period' config option if it exists; however,
+any use of the 'time_length' option will override any 'period' option'. To
+avoid confusion you may wish to rename any occurrences of 'period' under
+[StdReport] [[StackedWindRose]] in weewx.conf to 'time_length' ensuring you do
+not have any duplicate 'time_length' entries.
 
 
 Uninstallation Instructions
