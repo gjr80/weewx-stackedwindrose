@@ -98,7 +98,7 @@ except ImportError:
     import syslog
 
     def logmsg(level, msg):
-        syslog.syslog(level, 'aprx: %s' % msg)
+        syslog.syslog(level, 'stackedwindrose: %s' % msg)
 
     def loginf(msg):
         logmsg(syslog.LOG_INFO, msg)
