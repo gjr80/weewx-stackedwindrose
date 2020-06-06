@@ -387,7 +387,7 @@ has internet access you may be able to download the package directly as follows:
 
 1.	This will result in the windrose image file being generated during each report generation cycle. Generation can be confirmed by inspecting the *WeeWX* log, there should be a line similar to this amongst the report generation output:
 
-    Jun  6 09:26:16 buster30 weewx[1476] INFO user.stackedwindrose: Generated 1 images for StackedWindRose in 0.02 seconds
+        Jun  6 09:26:16 buster30 weewx[1476] INFO user.stackedwindrose: Generated 1 images for StackedWindRose in 0.02 seconds
 
 Upgrade Instructions
 
@@ -395,57 +395,57 @@ Upgrade Instructions
 
 1.  Upgrading from v2.1.1 and earlier. Due to a number of name changes in the Stacked Windrose Image Generator v3.0.0 users upgrading from an earlier Stacked Windrose Image Generator version to v3.0.0 or later will need to complete a number of manual steps after upgrading the Stacked Windrose Image Generator. These steps are:
 
--   Delete the legacy file imageStackedWindRose.py if it exists:
+- Delete the legacy file imageStackedWindRose.py if it exists:
 
         $ rm $BIN_ROOT/user/imageStackedWindRose.py
 
--   The `[[[ImageStackedWindRoseGenerator]]]` stanza under `[StdReport] [[StackedWindRose]]` in `weewx.conf` has been renamed to `[[[StackedWindRoseImageGenerator]]]` in v3.0.0 and later. After the upgrade you will likely have both a `[[[ImageStackedWindRoseGenerator]]]` stanza and a `[[[StackedWindRoseImageGenerator]]]` stanza. If you have customised any settings under `[[[ImageStackedWindRoseGenerator]]]` you may wish to copy those customisations to `[[[StackedWindRoseImageGenerator]]]`. Once this is done you should delete the `[[[ImageStackedWindRoseGenerator]]]` stanza.
+- The `[[[ImageStackedWindRoseGenerator]]]` stanza under `[StdReport] [[StackedWindRose]]` in `weewx.conf` has been renamed to `[[[StackedWindRoseImageGenerator]]]` in v3.0.0 and later. After the upgrade you will likely have both a `[[[ImageStackedWindRoseGenerator]]]` stanza and a `[[[StackedWindRoseImageGenerator]]]` stanza. If you have customised any settings under `[[[ImageStackedWindRoseGenerator]]]` you may wish to copy those customisations to `[[[StackedWindRoseImageGenerator]]]`. Once this is done you should delete the `[[[ImageStackedWindRoseGenerator]]]` stanza.
     
--   In line with WeeWX norms the config option used to set the time period covered by a plot has been renamed from `period` to `time_length`. In order to maintain backwards compatibility the Stacked Windrose Image Generator v3.0.0 or later will continue to use the `period` config option if it exists; however, any use of the `time_length` option will override any `period` option'. To avoid confusion you may wish to rename any occurrences of `period` under `[StdReport] [[StackedWindRose]]` in `weewx.conf` to `time_length` ensuring you do not have any duplicate `time_length` entries. 
+- In line with WeeWX norms the config option used to set the time period covered by a plot has been renamed from `period` to `time_length`. In order to maintain backwards compatibility the Stacked Windrose Image Generator v3.0.0 or later will continue to use the `period` config option if it exists; however, any use of the `time_length` option will override any `period` option'. To avoid confusion you may wish to rename any occurrences of `period` under `[StdReport] [[StackedWindRose]]` in `weewx.conf` to `time_length` ensuring you do not have any duplicate `time_length` entries. 
 
 ## Uninstallation Instructions
 
-1.  Run the uninstaller:
+1. Run the uninstaller:
 
         $ ./wee_extension --uninstall=StackedWindRose
 
     This command assumes the user is currently in the $BIN_ROOT folder. If this is not the case you may need to include the path to `wee_extension`.
 
-1.	Restart *WeeWX*:
+1. Restart *WeeWX*:
 
 
-    $ sudo /etc/init.d/weewx restart
-
-or
-
-    $ sudo service weewx restart
-
-or
-
-    $ sudo systemctl restart weewx
+        $ sudo /etc/init.d/weewx restart
+    
+    or
+    
+        $ sudo service weewx restart
+    
+    or
+    
+        $ sudo systemctl restart weewx
 
 ## Manual Uninstallation
 
-1.  Edit `weewx.conf` and delete the entire `[[StackedWindRose]]` section from `[StdReport]`.
+1. Edit `weewx.conf` and delete the entire `[[StackedWindRose]]` section from `[StdReport]`.
 
-1.  Delete the `stackedwindrose.py` file:
+1. Delete the `stackedwindrose.py` file:
 
         $ rm $BIN_ROOT/user/stackedwindrose.py
 
-1.  Delete the `$SKIN_ROOT/StackedWindRose` directory and its contents:
+1. Delete the `$SKIN_ROOT/StackedWindRose` directory and its contents:
 
         $ rm -rf $SKIN_ROOT/StackedWindRose
 
-1.	Restart *WeeWX*:
+1. Restart *WeeWX*:
 
 
-    $ sudo /etc/init.d/weewx restart
-
-or
-
-    $ sudo service weewx restart
-
-or
-
-    $ sudo systemctl restart weewx
+        $ sudo /etc/init.d/weewx restart
+    
+    or
+    
+        $ sudo service weewx restart
+    
+    or
+    
+        $ sudo systemctl restart weewx
 
