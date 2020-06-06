@@ -1,6 +1,7 @@
 v3.0.0
-*   now WeeWX3/4 python 2/3 compatible
-*   renamed image generator python file to stackedwindrose.py
+*   now WeeWX3.2+/4.x python 2.7/3.x compatible
+*   renamed generator python file and various classes, methods and variables
+*   reformatted image generator python code to remove numerous long lines
 *   revised/merged python code with WeeWX-WD stacked windrose generator to
     create a common code base
 *   reworked color validation/processing code
