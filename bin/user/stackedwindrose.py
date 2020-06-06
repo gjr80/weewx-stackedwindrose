@@ -105,7 +105,7 @@ except ImportError:
     def loginf(msg):
         logmsg(syslog.LOG_INFO, msg)
 
-STACKED_WINDROSE_VERSION = '3.0.0'
+STACKED_WINDROSE_VERSION = '3.0.1'
 DEFAULT_PETAL_COLORS = ['lightblue', 'blue', 'midnightblue', 'forestgreen',
                         'limegreen', 'green', 'greenyellow']
 

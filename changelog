@@ -1,3 +1,5 @@
+v3.0.1
+*   fixed issue with changed max() behaviour under python3
 v3.0.0
 *   now WeeWX3.2+/4.x python 2.7/3.x compatible
 *   renamed generator python file and various classes, methods and variables

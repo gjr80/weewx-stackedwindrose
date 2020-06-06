@@ -25,15 +25,15 @@ Installation Instructions
 
 1.  Download the Stacked Windrose Image Generator extension from the
 Release (https://github.com/gjr80/weewx-stackedwindrose/releases) page. The
-current release package is named stackedwindrose-3.0.0.tar.gz. If your WeeWX PC
+current release package is named stackedwindrose-3.0.1.tar.gz. If your WeeWX PC
 has internet access you may be able to download the package directly as
 follows:
 
-    $ wget -P /var/tmp/ https://github.com/gjr80/weewx-stackedwindrose/releases/download/v3.0.0/stackedwindrose-3.0.0.tar.gz
+    $ wget -P /var/tmp/ https://github.com/gjr80/weewx-stackedwindrose/releases/download/v3.0.1/stackedwindrose-3.0.1.tar.gz
 
 2.  Run the installer:
 
-    $ ./wee_extension --install=/var/tmp/stackedwindrose-3.0.0.tar.gz
+    $ ./wee_extension --install=/var/tmp/stackedwindrose-3.0.1.tar.gz
 
     This command assumes the user is currently in the $BIN_ROOT folder. If this
     is not the case you may need to include the path to wee_extension.
@@ -222,15 +222,15 @@ Manual Installation Instructions
 
 1.  Download the Stacked Windrose Image Generator extension from the
 Release (https://github.com/gjr80/weewx-stackedwindrose/releases) page. The
-current release package is named stackedwindrose-3.0.0.tar.gz. If your WeeWX PC
+current release package is named stackedwindrose-3.0.1.tar.gz. If your WeeWX PC
 has internet access you may be able to download the package directly as
 follows:
 
-    $ wget -P /var/tmp/ https://github.com/gjr80/weewx-stackedwindrose/releases/download/v3.0.0/stackedwindrose-3.0.0.tar.gz
+    $ wget -P /var/tmp/ https://github.com/gjr80/weewx-stackedwindrose/releases/download/v3.0.1/stackedwindrose-3.0.1.tar.gz
 
 2.  Extract the files from the tar.gz file:
 
-    $ tar -zxvf /var/tmp/stackedwindrose-3.0.0.tar.gz -C /var/tmp
+    $ tar -zxvf /var/tmp/stackedwindrose-3.0.1.tar.gz -C /var/tmp
 
 3.  Copy files as follows:
 
@@ -435,8 +435,8 @@ weewx.conf.YYYYMMDDHHMMSS where YYYYMMDDHHMMSS represents the date-time the
 upgrade was performed.
 
 2.  Upgrading from v2.1.1 and earlier. Due to a number of name changes in the
-Stacked Windrose Image Generator v3.0.0 users upgrading from an earlier Stacked
-Windrose Image Generator version to version 3.0.0 or later will need to
+Stacked Windrose Image Generator v3.0.1 users upgrading from an earlier Stacked
+Windrose Image Generator version to version 3.0.1 or later will need to
 complete a number of manual steps after upgrading the Stacked Windrose Image
 Generator. These steps are:
 
@@ -446,7 +446,7 @@ Generator. These steps are:
 
 -   The [[[ImageStackedWindRoseGenerator]]] stanza under [StdReport]
 [[StackedWindRose]] in weewx.conf has been renamed to
-[[[StackedWindRoseImageGenerator]]] in v3.0.0 and later. After the upgrade you
+[[[StackedWindRoseImageGenerator]]] in v3.0.1 and later. After the upgrade you
 will likely have both a [[[ImageStackedWindRoseGenerator]]] stanza and a
 [[[StackedWindRoseImageGenerator]]] stanza. If you have customised any settings
 under [[[ImageStackedWindRoseGenerator]]] you may wish to copy those
@@ -455,7 +455,7 @@ should delete the [[[ImageStackedWindRoseGenerator]]] stanza.
 
 -   In line with WeeWX norms the config option used to set the time period
 covered by a plot has been renamed from 'period' to 'time_length'. In order
-to maintain backwards compatibility the Stacked Windrose Image Generator v3.0.0
+to maintain backwards compatibility the Stacked Windrose Image Generator v3.0.1
 or later will continue to use the 'period' config option if it exists; however,
 any use of the 'time_length' option will override any 'period' option'. To
 avoid confusion you may wish to rename any occurrences of 'period' under
