@@ -1,3 +1,13 @@
+v3.0.0
+*   now WeeWX3/4 python 2/3 compatible
+*   renamed image generator python file to stackedwindrose.py
+*   revised/merged python code with WeeWX-WD stacked windrose generator to
+    create a common code base
+*   reworked color validation/processing code
+*   changed 'period' config option to 'time_length' for follow WeeWX standard
+*   reworked skip_this_plot() logic
+*   moved some previously separate utility functions into
+    class StackedWindRoseImageGenerator
 v2.1.1
 *   now respects log_success and log_failure config options
 *   minor reformatting/typos
