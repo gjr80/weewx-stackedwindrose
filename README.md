@@ -24,17 +24,17 @@ Where applicable the nominal location for your system and installation type shou
 
 ## Installation Instructions
 
-1.	Download the Stacked Windrose Image Generator extension from the
+1. Download the Stacked Windrose Image Generator extension from the
 [Releases](https://github.com/gjr80/weewx-stackedwindrose/releases "weewx-stackedwindrose Releases page on GitHub") page. The current release package is named `stackedwindrose-3.0.0.tar.gz`. If your *WeeWX* PC
 has internet access you may be able to download the package directly as follows:
 
     $ wget -P /var/tmp/ https://github.com/gjr80/weewx-stackedwindrose/releases/download/v3.0.0/stackedwindrose-3.0.0.tar.gz
 
-1.	Run the installer:
+1. Run the installer:
 
-    	    $ ./wee_extension --install=/var/tmp/stackedwindrose-3.0.0.tar.gz
+    $ ./wee_extension --install=/var/tmp/stackedwindrose-3.0.0.tar.gz
 
-      This command assumes the user is currently in the $BIN_ROOT folder. If this is not the case you may need to include the path to `wee_extension`.
+    This command assumes the user is currently in the $BIN_ROOT folder. If this is not the case you may need to include the path to `wee_extension`.
 
 1.	Various attributes of the generated plot can be controlled through a number of settings in the `[StdReport]` `[[StackedWindRose]]` section in `weewx.conf`. This approach has the advantage of retaining user settings across upgrades of this extension but any change to these parameters will require a *WeeWX* configuration reload or a *WeeWX* restart. The extension installer does not permit comments to be included in `weewx.conf` so the windrose plot parameters and explanatory notes are included below. Commonly changed options include the units of measure (`group_speed` parameter) and date-time format (`time_stamp` parameter). Edit any parameters as required:
 
