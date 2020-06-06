@@ -17,6 +17,8 @@ Revision History
         -   minor tweaks/optimisation
         -   changed generator python file name
         -   changed 'period' to 'time_length'
+        -   renamed ImageStackedWindRoseGenerator stanza to
+            StackedWindRoseImageGenerator
         -   revised comments formatting
     9 October 2018      v2.1.1
         -   version bump only
@@ -83,7 +85,7 @@ class StackedWindRoseInstaller(ExtensionInstaller):
                                 'windSpeed': 'Wind Speed'
                             }
                         },
-                        'ImageStackedWindRoseGenerator': {
+                        'StackedWindRoseImageGenerator': {
                             'image_background_image': 'None',
                             'image_width': '382',
                             'image_height': '361',
