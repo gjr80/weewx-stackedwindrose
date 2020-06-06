@@ -207,18 +207,18 @@ has internet access you may be able to download the package directly as follows:
 [Releases](https://github.com/gjr80/weewx-stackedwindrose/releases "weewx-stackedwindrose Releases page on GitHub") page. The current release package is named `stackedwindrose-3.0.0.tar.gz`. If your *WeeWX* PC
 has internet access you may be able to download the package directly as follows:
 
-        $ wget -P /var/tmp/ https://github.com/gjr80/weewx-stackedwindrose/releases/download/v3.0.0/stackedwindrose-3.0.0.tar.gz
+            $ wget -P /var/tmp/ https://github.com/gjr80/weewx-stackedwindrose/releases/download/v3.0.0/stackedwindrose-3.0.0.tar.gz
 
 1. Extract the files from the tar.gz file:
 
-        $ tar -zxvf /var/tmp/stackedwindrose-3.0.0.tar.gz -C /var/tmp
+            $ tar -zxvf /var/tmp/stackedwindrose-3.0.0.tar.gz -C /var/tmp
 
     **Note**: This will extract the extension package files to the `/var/tmp` folder
 
 1. Copy files as follows:
 
-	    $ cp /var/tmp/stackedwindrose/bin/user/stackedwindrose.py $BIN_ROOT/user
-        $ cp -R /var/tmp/stackedwindrose/skins/* $SKIN_ROOT
+            $ cp /var/tmp/stackedwindrose/bin/user/stackedwindrose.py $BIN_ROOT/user
+            $ cp -R /var/tmp/stackedwindrose/skins/* $SKIN_ROOT
 
 1. In `weewx.conf`, modify the `[StdReport]` section by adding the following sub-section:
 
