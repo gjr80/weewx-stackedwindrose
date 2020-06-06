@@ -16,7 +16,7 @@ Version: 3.0.1                                          Date: 7 June 2020
 
 Revision History
   7 June 2020           v3.0.1
-      - fix issue with chnaged max() behaviour under python3
+      - fix issue with changed max() behaviour under python3
   5 June 2020           v3.0.0
       - renamed this file and various classes, methods and variables
       - reformatting to remove numerous long lines
