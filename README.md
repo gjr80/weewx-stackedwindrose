@@ -184,10 +184,10 @@ has internet access you may be able to download the package directly as follows:
 	        skin = StackedWindRose
 	        HTML_ROOT = /use/this/folder
 
-1.	Restart *WeeWX*:
+1. Restart *WeeWX*:
 
 
-     $ sudo /etc/init.d/weewx restart
+    $ sudo /etc/init.d/weewx restart
 
 or
 
