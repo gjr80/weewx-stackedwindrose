@@ -218,6 +218,7 @@ class StackedWindRoseImageGenerator(weewx.reportengine.ReportGenerator):
         self.rose_max_dia = None
         self.origin_x = None
         self.origin_y = None
+        self.draw = None
 
     def run(self):
 
@@ -872,7 +873,7 @@ def parse_color(color, default=None):
                 g = (rgbint >> 8) & 255
                 b = (rgbint >> 16) & 255
                 # parse the RGB components and return the result
-                return parse_color('rgb(%s,%s,%s)' % (r,g,b), default)
+                return parse_color('rgb(%s,%s,%s)' % (r, g, b), default)
     except AttributeError:
         # getrgb() could not parse the string, most likely because the string
         # was not a string. Let it pass knowing the final return will attempt
