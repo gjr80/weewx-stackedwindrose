@@ -28,11 +28,11 @@ Where applicable the nominal location for your system and installation type shou
 [Releases](https://github.com/gjr80/weewx-stackedwindrose/releases "weewx-stackedwindrose Releases page on GitHub") page. The current release package is named `stackedwindrose-3.0.0.tar.gz`. If your *WeeWX* PC
 has internet access you may be able to download the package directly as follows:
 
-      $ wget -P /var/tmp/ https://github.com/gjr80/weewx-stackedwindrose/releases/download/v3.0.0/stackedwindrose-3.0.0.tar.gz
+       $ wget -P /var/tmp/ https://github.com/gjr80/weewx-stackedwindrose/releases/download/v3.0.0/stackedwindrose-3.0.0.tar.gz
 
 1. Run the installer:
 
-      $ ./wee_extension --install=/var/tmp/stackedwindrose-3.0.0.tar.gz
+       $ ./wee_extension --install=/var/tmp/stackedwindrose-3.0.0.tar.gz
 
     This command assumes the user is currently in the $BIN_ROOT folder. If this is not the case you may need to include the path to `wee_extension`.
 
