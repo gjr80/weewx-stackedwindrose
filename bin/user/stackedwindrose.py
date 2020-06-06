@@ -20,7 +20,7 @@ Revision History
       - reformatting to remove numerous long lines
       - reformat of these comments
       - introduced class UniDraw allow use of fonts that don't support unicode
-      - WeeWX 4.0 python2/3 compatible
+      - WeeWX 3.2+/4.x python2/3 compatible
       - now respects log_success and log_failure config options
       - reworked color validation code
       - changed period config setting to time_length to align with WeeWX norms
@@ -266,8 +266,16 @@ class StackedWindRoseImageGenerator(weewx.reportengine.ReportGenerator):
                 img_file = os.path.join(image_root, '%s.%s' % (plotname,
                                                                image_format))
                 # check whether this plot needs to be done at all
-                ai = plot_options.as_int('time_length') if 'time_length' in plot_options else None
-                if self.skip_this_plot(self.plotgen_ts, ai, img_file, plotname):
+                # Obtain the length of time to be covered by the plot, first
+                # check for the legacy 'period' option (renamed 'time_length'
+                # as of v3.0.0)
+                time_length = weeutil.weeutil.to_int(plot_options.get('period'))
+                # if we have a None value perhaps we are using the new
+                # 'time_length' option
+                if time_length is None:
+                    time_length = weeutil.weeutil.to_int(plot_options.get('time_length',
+                                                                          86400))
+                if self.skip_this_plot(self.plotgen_ts, time_length, img_file):
                     continue
                 # Create the subdirectory where the image is to be saved. Wrap
                 # in a try block in case it already exists.
@@ -313,10 +321,9 @@ class StackedWindRoseImageGenerator(weewx.reportengine.ReportGenerator):
                     else:
                         self.obs = 'windSpeed'
                         self.dir_name = 'windDir'
-                    # Get data tuples for speed and direction. Default to
-                    # 24 hour time frame if time_length not specified
-                    _length = int(plot_options.get('time_length', 86400)) + 1
-                    _span = weeutil.weeutil.TimeSpan(self.plotgen_ts - _length,
+                    # get data tuples for speed and direction
+                    # TODO. Review, may need to be time_length + 1
+                    _span = weeutil.weeutil.TimeSpan(self.plotgen_ts - time_length,
                                                      self.plotgen_ts)
                     (_t_vec, _t_vec_stop, _sp_vec) = db_manager.getSqlVectors(_span,
                                                                               self.obs)
@@ -741,16 +748,18 @@ class StackedWindRoseImageGenerator(weewx.reportengine.ReportGenerator):
                            ts_text,
                            fill=self.windrose_legend_font_color, font=self.legend_font)
 
-    def skip_this_plot(self, time_ts, time_length, img_file, plotname):
-        """    Plots must be generated if:
+    @staticmethod
+    def skip_this_plot(time_ts, time_length, img_file):
+        """Determine if a plot is to be skipped.
+
+        Plots must be generated if:
         (1) it does not exist
         (2) it is 24 hours old (or older)
 
         Every plot, irrespective of time_length, will likely be different to the
         last one but to reduce load for long time_length plots a plot can be
         skipped if:
-        (1) no time_length was specified (need to put entry in syslog)
-        (2) plot length is greater than 30 days and the plot file is less than
+        (1) plot length is greater than 30 days and the plot file is less than
             24 hours old
         (3) plot length is greater than 7 but less than 30 day and the plot file
             is less than 1 hour old
@@ -761,16 +770,7 @@ class StackedWindRoseImageGenerator(weewx.reportengine.ReportGenerator):
         time_length: Length of time over which plot is produced
 
         img_file: Full path and filename of plot file
-
-        plotname: Name of plot
         """
-
-        # images without a time_length must be skipped every time and a log
-        # entry added
-        if time_length is None:
-            if self.log_failure:
-                loginf("Plot '%s' ignored, no 'time_length' specified" % plotname)
-            return True
 
         # the image definitely has to be generated if it doesn't exist
         if not os.path.exists(img_file):
