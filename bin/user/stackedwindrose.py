@@ -12,9 +12,12 @@ This program is distributed in the hope that it will be useful, but WITHOUT ANY
 WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A
 PARTICULAR PURPOSE.  See the GNU General Public License for more details.
 
-Version: 3.0.1                                          Date: 7 June 2020
+Version: 3.0.2                                          Date: 6 July 2023
 
 Revision History
+  6 July 2023           v3.0.2
+      - fix error due to deprecated PIL.ImageDraw.textsize() method being
+        removed from PIL 10.0
   7 June 2020           v3.0.1
       - fix issue with changed max() behaviour under python3
   5 June 2020           v3.0.0
@@ -78,7 +81,7 @@ import weewx.reportengine
 import weewx.units
 
 from weeplot.utilities import get_font_handle
-# search_up was moved from weeutil.weeutil to weeutil.config in v3.9.0 so we
+# search_up was moved from weeutil.weeutil to weeutil.config in v3.9.0, so we
 # need to try each until we find it
 try:
     from weeutil.config import search_up
@@ -105,14 +108,14 @@ except ImportError:
     def loginf(msg):
         logmsg(syslog.LOG_INFO, msg)
 
-STACKED_WINDROSE_VERSION = '3.0.1'
+STACKED_WINDROSE_VERSION = '3.0.2'
 DEFAULT_PETAL_COLORS = ['lightblue', 'blue', 'midnightblue', 'forestgreen',
                         'limegreen', 'green', 'greenyellow']
+
 
 # ==============================================================================
 #                      Class StackedWindRoseImageGenerator
 # ==============================================================================
-
 
 class StackedWindRoseImageGenerator(weewx.reportengine.ReportGenerator):
     """Generate a polar wind rose plot image."""
@@ -532,8 +535,8 @@ class StackedWindRoseImageGenerator(weewx.reportengine.ReportGenerator):
                     self.draw.text(xy, label0,
                                    fill=self.windrose_plot_font_color,
                                    font=self.plot_font)
-                    # Setup the legend. Draw label/title (if set), stacked bar,
-                    # bar labels and units
+                    # Set up the legend. Draw label/title (if set), stacked
+                    # bar, bar labels and units
                     self.legend_setup(speed_list, speed_bin)
                 # save the file.
                 image.save(img_file)
@@ -802,26 +805,71 @@ class StackedWindRoseImageGenerator(weewx.reportengine.ReportGenerator):
 
 
 class UniDraw(ImageDraw.ImageDraw):
-    """Supports non-Unicode fonts
+    """Subclassed PIL ImageDraw.ImageDraw that supports non-Unicode fonts.
 
-    Not all fonts support Unicode characters. These will raise a
-    UnicodeEncodeError exception. This class subclasses the regular
-    ImageDraw.Draw class, adding overridden functions to catch these
-    exceptions. It then tries drawing the string again, this time as a UTF8
-    string.
+    Not all fonts support Unicode characters. Those that do not will raise a
+    UnicodeEncodeError exception. This class subclasses the regular PIL
+    ImageDraw.ImageDraw class and overrides/adds selected functions to catch
+    these exceptions. If a UnicodeEncodeError is caught rendering the string is
+    retried, this time using a UTF8 encoded string.
+
+    The text() method is overriden to catch possible UnicodeEncodeError
+    exceptions and substitute a UTF8 encode string instead.
+
+    The textsize() method has been added as whilst the textsize() method
+    has been removed from PIL 10.0 it still remains in earlier PIL versions and
+    the (now) complex error catching
     """
 
     def text(self, position, string, **options):
+        """Draw a string using a Unicode or non-Unicode font."""
+
         try:
             return ImageDraw.ImageDraw.text(self, position, string, **options)
         except UnicodeEncodeError:
+            # our string needs to be properly encoded, try again with utf-8 encoding
             return ImageDraw.ImageDraw.text(self, position, string.encode('utf-8'), **options)
 
     def textsize(self, string, **options):
+        """Obtain the size of a string rendered using a Unicode or non-Unicode font.
+
+        Returns the width and height of the rendered string.
+
+        Unfortunately the ImageDraw.textsize() method was deprecated in PIL
+        v9.2 and removed in v10.0. ImageDraw.textbbox() and
+        ImageDraw.multiline_textbbox() methods should be used instead. In order
+        to support earlier PIL versions we need to first try the new method and
+        if not found then try the old.
+        """
+
+        # first try to use textsize(), if we have PIL < 10.0 it will either
+        # work or a UnicodeEncodeError will be raised
         try:
             return ImageDraw.ImageDraw.textsize(self, string, **options)
         except UnicodeEncodeError:
+            # we have PIL < 10.0, but we encountered a UnicodeEncodeError, try
+            # again with utf-8 encoding
             return ImageDraw.ImageDraw.textsize(self, string.encode('utf-8'), **options)
+        except AttributeError:
+            # there is no textsize() method so this must be PIL 10.0 or later,
+            # try again but this time using the PIL 10.0 equivalents
+            try:
+                # first try the textbox bounds
+                left, top, right, bottom = ImageDraw.ImageDraw.multiline_textbbox(self,
+                                                                                  xy=(0, 0),
+                                                                                  text=string,
+                                                                                  **options)
+                # now calculate and return the width and height we require
+                return right - left, bottom - top
+            except UnicodeEncodeError:
+                # we encountered a UnicodeEncodeError, try the same call again
+                # but with utf-8 encoding
+                left, top, right, bottom = ImageDraw.ImageDraw.multiline_textbbox(self,
+                                                                                  xy=(0, 0),
+                                                                                  text=string.encode('utf-8'),
+                                                                                  **options)
+                # now calculate and return the width and height we require
+                return right - left, bottom - top
 
 
 def parse_color(color, default=None):
@@ -831,7 +879,7 @@ def parse_color(color, default=None):
     the value. The string may be:
     -   a supported color word eg 'red'
     -   in the format #RRGGBB where RR, GG and BB are hexadecimal values from
-        00-FF inclusive representing the the red, green and blue values
+        00-FF inclusive representing the red, green and blue values
         respectively, eg #FF8800
     -   in the format rgb(R,G,B) where R,G,B are numbers from 0 to 255 or
         percentages from 0% to 100% representing the red green and blue values
