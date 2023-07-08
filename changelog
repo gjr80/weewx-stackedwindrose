@@ -1,3 +1,6 @@
+v3.0.2
+*   fix error due to deprecated PIL.ImageDraw.textsize() method being removed
+    from PIL 10.0
 v3.0.1
 *   fixed issue with changed max() behaviour under python3
 v3.0.0

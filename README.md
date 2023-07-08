@@ -25,14 +25,14 @@ Where applicable the nominal location for your system and installation type shou
 ## Installation Instructions
 
 1. Download the Stacked Windrose Image Generator extension from the
-[Releases](https://github.com/gjr80/weewx-stackedwindrose/releases "weewx-stackedwindrose Releases page on GitHub") page. The current release package is named `stackedwindrose-3.0.1.tar.gz`. If your *WeeWX* PC
+[Releases](https://github.com/gjr80/weewx-stackedwindrose/releases "weewx-stackedwindrose Releases page on GitHub") page. The current release package is named `stackedwindrose-3.0.2.tar.gz`. If your *WeeWX* PC
 has internet access you may be able to download the package directly as follows:
 
-       $ wget -P /var/tmp/ https://github.com/gjr80/weewx-stackedwindrose/releases/download/v3.0.1/stackedwindrose-3.0.1.tar.gz
+       $ wget -P /var/tmp/ https://github.com/gjr80/weewx-stackedwindrose/releases/download/v3.0.1/stackedwindrose-3.0.2.tar.gz
 
 1. Run the installer:
 
-       $ ./wee_extension --install=/var/tmp/stackedwindrose-3.0.1.tar.gz
+       $ ./wee_extension --install=/var/tmp/stackedwindrose-3.0.2.tar.gz
 
     This command assumes the user is currently in the $BIN_ROOT folder. If this is not the case you may need to include the path to `wee_extension`.
 
@@ -204,14 +204,14 @@ has internet access you may be able to download the package directly as follows:
 ## Manual Installation Instructions
 
 1. Download the Stacked Windrose Image Generator extension from the
-[Releases](https://github.com/gjr80/weewx-stackedwindrose/releases "weewx-stackedwindrose Releases page on GitHub") page. The current release package is named `stackedwindrose-3.0.1.tar.gz`. If your *WeeWX* PC
+[Releases](https://github.com/gjr80/weewx-stackedwindrose/releases "weewx-stackedwindrose Releases page on GitHub") page. The current release package is named `stackedwindrose-3.0.2.tar.gz`. If your *WeeWX* PC
 has internet access you may be able to download the package directly as follows:
 
-        $ wget -P /var/tmp/ https://github.com/gjr80/weewx-stackedwindrose/releases/download/v3.0.1/stackedwindrose-3.0.1.tar.gz
+        $ wget -P /var/tmp/ https://github.com/gjr80/weewx-stackedwindrose/releases/download/v3.0.1/stackedwindrose-3.0.2.tar.gz
 
 1. Extract the files from the tar.gz file:
 
-        $ tar -zxvf /var/tmp/stackedwindrose-3.0.1.tar.gz -C /var/tmp
+        $ tar -zxvf /var/tmp/stackedwindrose-3.0.2.tar.gz -C /var/tmp
 
     **Note**: This will extract the extension package files to the `/var/tmp` folder
 
