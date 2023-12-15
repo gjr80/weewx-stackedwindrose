@@ -28,7 +28,7 @@ Where applicable the nominal location for your system and installation type shou
 [Releases](https://github.com/gjr80/weewx-stackedwindrose/releases "weewx-stackedwindrose Releases page on GitHub") page. The current release package is named `stackedwindrose-3.0.2.tar.gz`. If your *WeeWX* PC
 has internet access you may be able to download the package directly as follows:
 
-       $ wget -P /var/tmp/ https://github.com/gjr80/weewx-stackedwindrose/releases/download/v3.0.1/stackedwindrose-3.0.2.tar.gz
+       $ wget -P /var/tmp/ https://github.com/gjr80/weewx-stackedwindrose/releases/download/v3.0.2/stackedwindrose-3.0.2.tar.gz
 
 1. Run the installer:
 
@@ -207,7 +207,7 @@ has internet access you may be able to download the package directly as follows:
 [Releases](https://github.com/gjr80/weewx-stackedwindrose/releases "weewx-stackedwindrose Releases page on GitHub") page. The current release package is named `stackedwindrose-3.0.2.tar.gz`. If your *WeeWX* PC
 has internet access you may be able to download the package directly as follows:
 
-        $ wget -P /var/tmp/ https://github.com/gjr80/weewx-stackedwindrose/releases/download/v3.0.1/stackedwindrose-3.0.2.tar.gz
+        $ wget -P /var/tmp/ https://github.com/gjr80/weewx-stackedwindrose/releases/download/v3.0.2/stackedwindrose-3.0.2.tar.gz
 
 1. Extract the files from the tar.gz file:
 
