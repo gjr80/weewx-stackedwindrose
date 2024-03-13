@@ -1,3 +1,8 @@
+v3.1.0
+*   removed installer distutils.StrictVersion dependency
+*   installer now uses weecfg.extension.ExtensionInstaller
+*   installer now uses a multi-line string and StringIO to obtain the
+    extension installer config dict
 v3.0.2
 *   fix error due to deprecated PIL.ImageDraw.textsize() method being removed
     from PIL 10.0

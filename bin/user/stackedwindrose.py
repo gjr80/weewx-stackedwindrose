@@ -12,50 +12,57 @@ This program is distributed in the hope that it will be useful, but WITHOUT ANY
 WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A
 PARTICULAR PURPOSE.  See the GNU General Public License for more details.
 
-Version: 3.0.2                                          Date: 6 July 2023
+Version: 3.1.0                                          Date: 14 March 2024
 
 Revision History
-  6 July 2023           v3.0.2
-      - fix error due to deprecated PIL.ImageDraw.textsize() method being
-        removed from PIL 10.0
-  7 June 2020           v3.0.1
-      - fix issue with changed max() behaviour under python3
-  5 June 2020           v3.0.0
-      - renamed this file and various classes, methods and variables
-      - reformatting to remove numerous long lines
-      - reformat of these comments
-      - introduced class UniDraw allow use of fonts that don't support unicode
-      - WeeWX 3.2+/4.x python2/3 compatible
-      - now respects log_success and log_failure config options
-      - reworked color validation code
-      - changed period config setting to time_length to align with WeeWX norms
+    14 March 2024         v3.1.0
+        -   version number change only
+    6 July 2023           v3.0.2
+        -   fix error due to deprecated PIL.ImageDraw.textsize() method being
+            removed from PIL 10.0
+    7 June 2020           v3.0.1
+        -   fix issue with changed max() behaviour under python3
+    5 June 2020           v3.0.0
+        -   renamed this file and various classes, methods and variables
+        -   reformatting to remove numerous long lines
+        -   reformat of these comments
+        -   introduced class UniDraw allow use of fonts that don't support
+            unicode
+        -   WeeWX 3.2+/4.x python2/3 compatible
+        -   now respects log_success and log_failure config options
+        -   reworked color validation code
+        -   changed period config setting to time_length to align with WeeWX
+            norms
 
 Previous Bitbucket revision history
-  31 March 2017         v1.0.3
-      - no change, version number change only
-  14 December 2016      v1.0.2
-      - fixed Image/ImageDraw import issue, now tries to import from PIL first
-      - fixed issue where wind speed was always displayed in the windSpeed/
-        windGust units used in the WeeWX database
-      - speed and direction ValueTuples now use .value property instead of [0]
-        to access the ValueTuple value
-  30 November 2016      v1.0.1
-      - fixed issue whereby WeeWX would exit if the requested font is not
-        installed, now defaults to a system font used by WeeWX if the requested
-        font is not installed
-      - minor reformatting of long lines and equations
-  10 January 2015       v1.0.0
-      - rewritten for WeeWX v3.0.0
-  1 May 2014            v0.9.3
-      - fixed issue that arose with WeeWX 2.6.3 now allowing use of UTF-8
+    31 March 2017         v1.0.3
+        -   no change, version number change only
+    14 December 2016      v1.0.2
+        -   fixed Image/ImageDraw import issue, now tries to import from PIL
+            first
+        -   fixed issue where wind speed was always displayed in the windSpeed/
+            windGust units used in the WeeWX database
+        -   speed and direction ValueTuples now use .value property instead of
+            [0] to access the ValueTuple value
+    30 November 2016      v1.0.1
+        -   fixed issue whereby WeeWX would exit if the requested font is not
+            installed, now defaults to a system font used by WeeWX if the
+            requested font is not installed
+        -   minor reformatting of long lines and equations
+    10 January 2015       v1.0.0
+        -   rewritten for WeeWX v3.0.0
+    1 May 2014            v0.9.3
+        -   fixed issue that arose with WeeWX 2.6.3 now allowing use of UTF-8
         characters in plots
-      - fixed logic error in code that calculates size of wind rose 'petals'
-      - removed unnecessary import statements
-      - tweaked wind rose size calculations to better cater for labels on plot
-  30 July 2013          v0.9.1
-      - revised version number to align with WeeWX-WD version numbering
-  20 July 2013          v0.1
-      - initial implementation
+        -   fixed logic error in code that calculates size of wind rose
+            'petals'
+        -   removed unnecessary import statements
+        -   tweaked wind rose size calculations to better cater for labels on
+            plot
+    30 July 2013          v0.9.1
+        -   revised version number to align with WeeWX-WD version numbering
+    20 July 2013          v0.1
+        -   initial implementation
 """
 
 # python imports
@@ -108,7 +115,7 @@ except ImportError:
     def loginf(msg):
         logmsg(syslog.LOG_INFO, msg)
 
-STACKED_WINDROSE_VERSION = '3.0.2'
+STACKED_WINDROSE_VERSION = '3.1.0'
 DEFAULT_PETAL_COLORS = ['lightblue', 'blue', 'midnightblue', 'forestgreen',
                         'limegreen', 'green', 'greenyellow']
 
